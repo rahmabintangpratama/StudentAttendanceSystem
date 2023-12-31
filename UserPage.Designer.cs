@@ -43,6 +43,7 @@
             this.lblEmail = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
+            this.btnBack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUser)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,9 +59,9 @@
             this.lblUserId.AutoSize = true;
             this.lblUserId.Location = new System.Drawing.Point(14, 31);
             this.lblUserId.Name = "lblUserId";
-            this.lblUserId.Size = new System.Drawing.Size(67, 20);
+            this.lblUserId.Size = new System.Drawing.Size(64, 20);
             this.lblUserId.TabIndex = 32;
-            this.lblUserId.Text = "ID Akun";
+            this.lblUserId.Text = "User ID";
             // 
             // textBoxRole
             // 
@@ -90,39 +91,43 @@
             // 
             // btnDisplay
             // 
-            this.btnDisplay.Location = new System.Drawing.Point(672, 108);
+            this.btnDisplay.Location = new System.Drawing.Point(666, 169);
             this.btnDisplay.Name = "btnDisplay";
             this.btnDisplay.Size = new System.Drawing.Size(114, 48);
             this.btnDisplay.TabIndex = 28;
             this.btnDisplay.Text = "Display";
             this.btnDisplay.UseVisualStyleBackColor = true;
+            this.btnDisplay.Click += new System.EventHandler(this.btnDisplay_Click);
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(525, 111);
+            this.btnDelete.Location = new System.Drawing.Point(519, 172);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(114, 48);
             this.btnDelete.TabIndex = 27;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(672, 25);
+            this.btnUpdate.Location = new System.Drawing.Point(666, 86);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(114, 48);
             this.btnUpdate.TabIndex = 26;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(525, 25);
+            this.btnAdd.Location = new System.Drawing.Point(519, 86);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(114, 48);
             this.btnAdd.TabIndex = 25;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // textBoxPassword
             // 
@@ -172,11 +177,22 @@
             this.textBoxName.Size = new System.Drawing.Size(235, 26);
             this.textBoxName.TabIndex = 17;
             // 
+            // btnBack
+            // 
+            this.btnBack.Location = new System.Drawing.Point(666, 17);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(114, 48);
+            this.btnBack.TabIndex = 34;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
             // UserPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.textBoxUserId);
             this.Controls.Add(this.lblUserId);
             this.Controls.Add(this.textBoxRole);
@@ -217,5 +233,6 @@
         private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.TextBox textBoxName;
+        private System.Windows.Forms.Button btnBack;
     }
 }

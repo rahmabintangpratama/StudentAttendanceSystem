@@ -21,6 +21,11 @@ namespace StudentAttendanceSystem
         // Tambahkan event handler untuk FormClosing
         private void AdministratorPage_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Application.Exit();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
             // Tampilkan dialog konfirmasi sebelum menutup form
             DialogResult result = MessageBox.Show("Are you sure you want to close this page?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -29,11 +34,10 @@ namespace StudentAttendanceSystem
                 // Jika pengguna mengklik Yes, kembali ke halaman login
                 LoginPage loginPage = new LoginPage();
                 loginPage.Show();
+                this.Hide();
             }
             else
             {
-                // Jika pengguna mengklik No, batalkan penutupan form
-                e.Cancel = true;
             }
         }
 
@@ -41,7 +45,7 @@ namespace StudentAttendanceSystem
         {
             UserPage userPage = new UserPage();
             userPage.Show();
-            this.Close();
+            this.Hide();
         }
 
         private void btnMatkul_Click(object sender, EventArgs e)

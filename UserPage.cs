@@ -10,16 +10,16 @@ using System.Windows.Forms;
 
 namespace StudentAttendanceSystem
 {
-    public partial class AdministratorPage : Form
+    public partial class UserPage : Form
     {
-        public AdministratorPage()
+        public UserPage()
         {
             InitializeComponent();
-            this.FormClosing += new FormClosingEventHandler(AdministratorPage_FormClosing);
+            this.FormClosing += new FormClosingEventHandler(UserPage_FormClosing);
         }
 
         // Tambahkan event handler untuk FormClosing
-        private void AdministratorPage_FormClosing(object sender, FormClosingEventArgs e)
+        private void UserPage_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Tampilkan dialog konfirmasi sebelum menutup form
             DialogResult result = MessageBox.Show("Are you sure you want to close this page?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -27,31 +27,14 @@ namespace StudentAttendanceSystem
             if (result == DialogResult.Yes)
             {
                 // Jika pengguna mengklik Yes, kembali ke halaman login
-                LoginPage loginPage = new LoginPage();
-                loginPage.Show();
+                AdministratorPage adminPage = new AdministratorPage();
+                adminPage.Show();
             }
             else
             {
                 // Jika pengguna mengklik No, batalkan penutupan form
                 e.Cancel = true;
             }
-        }
-
-        private void btnUser_Click(object sender, EventArgs e)
-        {
-            UserPage userPage = new UserPage();
-            userPage.Show();
-            this.Close();
-        }
-
-        private void btnMatkul_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnPresensi_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

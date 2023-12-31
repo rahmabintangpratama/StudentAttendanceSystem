@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-using SessionManager.h;
 
 namespace StudentAttendanceSystem
 {
@@ -38,10 +37,7 @@ namespace StudentAttendanceSystem
 
             if (LoginUser(email, password))
             {
-                long loggedInUserID = GetLoggedInUserID(email);
                 int userRole = GetUserRole(email);
-
-                SessionManager.SetLoggedInUser(loggedInUserID, userRole);
 
                 OpenHomePage(userRole);
             }

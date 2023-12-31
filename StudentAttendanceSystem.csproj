@@ -127,6 +127,12 @@
     <Compile Include="StudentPage.Designer.cs">
       <DependentUpon>StudentPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserPage.Designer.cs">
+      <DependentUpon>UserPage.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AdministratorPage.resx">
       <DependentUpon>AdministratorPage.cs</DependentUpon>
     </EmbeddedResource>

@@ -90,3 +90,4 @@ C:\Users\acer\Documents\Semester 5\Pemrograman Platform Desktop dan Embedded\ver
 C:\Users\acer\Documents\Semester 5\Pemrograman Platform Desktop dan Embedded\versi 2\StudentAttendanceSystem\obj\Debug\StudentAttendanceSystem.csproj.CopyComplete
 C:\Users\acer\Documents\Semester 5\Pemrograman Platform Desktop dan Embedded\versi 2\StudentAttendanceSystem\obj\Debug\StudentAttendanceSystem.exe
 C:\Users\acer\Documents\Semester 5\Pemrograman Platform Desktop dan Embedded\versi 2\StudentAttendanceSystem\obj\Debug\StudentAttendanceSystem.pdb
+C:\Users\acer\Documents\Semester 5\Pemrograman Platform Desktop dan Embedded\versi 2\StudentAttendanceSystem\obj\Debug\StudentAttendanceSystem.UserPage.resources

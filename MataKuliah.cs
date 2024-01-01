@@ -4,22 +4,26 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StudentAttendanceSystem
 {
-    public partial class AdministratorPage : Form
+    public partial class MataKuliah : Form
     {
-        public AdministratorPage()
+        private Connect connect;
+        public MataKuliah()
         {
-            InitializeComponent();
-            this.FormClosing += new FormClosingEventHandler(AdministratorPage_FormClosing);
+            InitializeComponent(); ;
+            this.FormClosing += new FormClosingEventHandler(MataKuliahPage_FormClosing);
+
+            connect = new Connect();
         }
 
         // Tambahkan event handler untuk FormClosing
-        private void AdministratorPage_FormClosing(object sender, FormClosingEventArgs e)
+        private void MataKuliahPage_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
         }
@@ -32,8 +36,8 @@ namespace StudentAttendanceSystem
             if (result == DialogResult.Yes)
             {
                 // Jika pengguna mengklik Yes, kembali ke halaman login
-                LoginPage loginPage = new LoginPage();
-                loginPage.Show();
+                AdministratorPage adminPage = new AdministratorPage();
+                adminPage.Show();
                 this.Hide();
             }
             else
@@ -41,23 +45,17 @@ namespace StudentAttendanceSystem
             }
         }
 
-        private void btnUser_Click(object sender, EventArgs e)
+        private void btnDisplay_Click(object sender, EventArgs e)
         {
-            UserPage userPage = new UserPage();
-            userPage.Show();
-            this.Hide();
+            displayData();
         }
 
-        private void btnMatkul_Click(object sender, EventArgs e)
+        private void displayData()
         {
-            MataKuliah mataKuliah = new MataKuliah();
-            mataKuliah.Show();
-            this.Hide();
-        }
+            string query = "SELECT m.KodeMataKuliah AS Kode_Mata_Kuliah, m.NamaMataKuliah AS Mata_Kuliah, u.Nama AS Dosen_Pengampu FROM matakuliah m JOIN user u ON (m.UserID = u.UserID) ORDER BY Kode_Mata_Kuliah ASC";
+            DataTable matkulData = connect.ExecuteQuery(query);
 
-        private void btnPresensi_Click(object sender, EventArgs e)
-        {
-
+            dataGridViewMatKul.DataSource = matkulData;
         }
     }
 }

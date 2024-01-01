@@ -71,6 +71,7 @@
             // 
             // dataGridViewMatKul
             // 
+            this.dataGridViewMatKul.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewMatKul.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewMatKul.Location = new System.Drawing.Point(16, 208);
             this.dataGridViewMatKul.Name = "dataGridViewMatKul";
@@ -98,6 +99,7 @@
             this.btnDelete.TabIndex = 43;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnUpdate
             // 
@@ -107,6 +109,7 @@
             this.btnUpdate.TabIndex = 42;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnAdd
             // 
@@ -116,6 +119,7 @@
             this.btnAdd.TabIndex = 41;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // lblDosenPengampu
             // 

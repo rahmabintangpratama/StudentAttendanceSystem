@@ -107,6 +107,13 @@
     <Compile Include="AdministratorPage.Designer.cs">
       <DependentUpon>AdministratorPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="AttendancePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AttendancePage.Designer.cs">
+      <DependentUpon>AttendancePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AttendanceProcess.cs" />
     <Compile Include="Connect.cs" />
     <Compile Include="EventPage.cs">
       <SubType>Form</SubType>
@@ -151,6 +158,9 @@
     <Compile Include="UserProcess.cs" />
     <EmbeddedResource Include="AdministratorPage.resx">
       <DependentUpon>AdministratorPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AttendancePage.resx">
+      <DependentUpon>AttendancePage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EventPage.resx">
       <DependentUpon>EventPage.cs</DependentUpon>

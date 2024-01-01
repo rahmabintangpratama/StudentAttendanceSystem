@@ -57,7 +57,9 @@ namespace StudentAttendanceSystem
 
         private void btnPresensi_Click(object sender, EventArgs e)
         {
-
+            AttendancePage attendancePage = new AttendancePage();
+            attendancePage.Show();
+            this.Hide();
         }
 
         private void btnEvent_Click(object sender, EventArgs e)

@@ -148,6 +148,7 @@
             // 
             // comboBoxDosenPengampu
             // 
+            this.comboBoxDosenPengampu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxDosenPengampu.FormattingEnabled = true;
             this.comboBoxDosenPengampu.Location = new System.Drawing.Point(198, 103);
             this.comboBoxDosenPengampu.Name = "comboBoxDosenPengampu";

@@ -59,5 +59,12 @@ namespace StudentAttendanceSystem
         {
 
         }
+
+        private void btnEvent_Click(object sender, EventArgs e)
+        {
+            EventPage eventPage = new EventPage();
+            eventPage.Show();
+            this.Hide();
+        }
     }
 }

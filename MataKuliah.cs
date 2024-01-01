@@ -18,12 +18,13 @@ namespace StudentAttendanceSystem
         private MatKulProcess matkulProcess;
         public MataKuliah()
         {
-            InitializeComponent(); ;
+            InitializeComponent();
             this.FormClosing += new FormClosingEventHandler(MataKuliahPage_FormClosing);
 
             connect = new Connect();
             matkulProcess = new MatKulProcess();
             FillComboBoxDosenPengampu();
+            displayData();
         }
 
         private void FillComboBoxDosenPengampu()
@@ -88,8 +89,8 @@ namespace StudentAttendanceSystem
             if (AddMatKul(MatKul, MatKulName, userID))
             {
                 MessageBox.Show("\"Mata Kuliah\" successfuly added.");
-                textBoxMatKul.Text = "";
-                textBoxMatKulName.Text = "";
+                textBoxMatKul.Clear();
+                textBoxMatKulName.Clear();
             }
             else
             {
@@ -139,8 +140,8 @@ namespace StudentAttendanceSystem
             if (UpdateMatKul(MatKul, MatKulName, userID))
             {
                 MessageBox.Show("\"Mata Kuliah\" successfuly edited.");
-                textBoxMatKul.Text = "";
-                textBoxMatKulName.Text = "";
+                textBoxMatKul.Clear();
+                textBoxMatKulName.Clear();
             }
             else
             {
@@ -171,7 +172,7 @@ namespace StudentAttendanceSystem
             if (DeleteMatKul(MatKul))
             {
                 MessageBox.Show("\"Mata Kuliah\" Successfuly Deleted.");
-                textBoxMatKul.Text = "";
+                textBoxMatKul.Clear();
             }
             else
             {

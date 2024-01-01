@@ -22,6 +22,7 @@ namespace StudentAttendanceSystem
 
             connect = new Connect();
             userProcess = new UserProcess();
+            displayData();
         }
 
         // Tambahkan event handler untuk FormClosing
@@ -71,11 +72,11 @@ namespace StudentAttendanceSystem
             if (AddUser(userID, nama, email, password, role))
             {
                 MessageBox.Show("Account successfuly added.");
-                textBoxUserId.Text = "";
-                textBoxName.Text = "";
-                textBoxEmail.Text = "";
-                textBoxPassword.Text = "";
-                textBoxRole.Text = "";
+                textBoxUserId.Clear();
+                textBoxName.Clear();
+                textBoxEmail.Clear();
+                textBoxPassword.Clear();
+                textBoxRole.Clear();
             }
             else
             {
@@ -126,11 +127,11 @@ namespace StudentAttendanceSystem
             if (UpdateUser(UserID, nama, email, password, role))
             {
                 MessageBox.Show("Account successfuly edited.");
-                textBoxUserId.Text = "";
-                textBoxName.Text = "";
-                textBoxEmail.Text = "";
-                textBoxPassword.Text = "";
-                textBoxRole.Text = "";
+                textBoxUserId.Clear();
+                textBoxName.Clear();
+                textBoxEmail.Clear();
+                textBoxPassword.Clear();
+                textBoxRole.Clear();
             }
             else
             {
@@ -161,7 +162,7 @@ namespace StudentAttendanceSystem
             if (DeleteUser(UserID))
             {
                 MessageBox.Show("Account Successfuly Deleted.");
-                textBoxUserId.Text = "";
+                textBoxUserId.Clear();
             }
             else
             {

@@ -32,6 +32,7 @@
             this.btnMatkul = new System.Windows.Forms.Button();
             this.btnUser = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
+            this.btnEvent = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnPresensi
@@ -78,11 +79,23 @@
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // btnEvent
+            // 
+            this.btnEvent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEvent.Location = new System.Drawing.Point(308, 282);
+            this.btnEvent.Name = "btnEvent";
+            this.btnEvent.Size = new System.Drawing.Size(182, 49);
+            this.btnEvent.TabIndex = 18;
+            this.btnEvent.Text = "Event";
+            this.btnEvent.UseVisualStyleBackColor = true;
+            this.btnEvent.Click += new System.EventHandler(this.btnEvent_Click);
+            // 
             // AdministratorPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnEvent);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnPresensi);
             this.Controls.Add(this.btnMatkul);
@@ -99,5 +112,6 @@
         private System.Windows.Forms.Button btnMatkul;
         private System.Windows.Forms.Button btnUser;
         private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Button btnEvent;
     }
 }

@@ -78,14 +78,14 @@ namespace StudentAttendanceSystem
             return userCount == 0;
         }
 
-        public int GetUserId(string email)
+        public long GetUserID(string email)
         {
-            string query = $"SELECT id FROM user WHERE email = '{email}'";
+            string query = $"SELECT UserID FROM user WHERE email = '{email}'";
             DataTable result = connect.ExecuteQuery(query);
 
             if (result.Rows.Count > 0)
             {
-                return Convert.ToInt32(result.Rows[0]["id"]);
+                return Convert.ToInt64(result.Rows[0]["UserID"]);
             }
 
             return 0;

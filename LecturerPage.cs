@@ -19,13 +19,13 @@ namespace StudentAttendanceSystem
             this.FormClosing += new FormClosingEventHandler(LecturerPage_FormClosing);
         }
 
-        private void LecturerPage_Load(object sender, EventArgs e)
-        {
-
-        }
-
         // Tambahkan event handler untuk FormClosing
         private void LecturerPage_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
         {
             // Tampilkan dialog konfirmasi sebelum menutup form
             DialogResult result = MessageBox.Show("Are you sure you want to close this page?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -35,32 +35,22 @@ namespace StudentAttendanceSystem
                 // Jika pengguna mengklik Yes, kembali ke halaman login
                 LoginPage loginPage = new LoginPage();
                 loginPage.Show();
-            }
-            else
-            {
-                // Jika pengguna mengklik No, batalkan penutupan form
-                e.Cancel = true;
+                this.Hide();
             }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnPresensi_Click(object sender, EventArgs e)
         {
-
+            AttendanceForm attendanceForm = new AttendanceForm();
+            attendanceForm.Show();
+            this.Hide();
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void btnEvent_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-
+            EventForm eventForm = new EventForm();
+            eventForm.Show();
+            this.Hide();
         }
     }
 }

@@ -13,12 +13,15 @@ namespace StudentAttendanceSystem
 {
     public partial class LoginPage : Form
     {
+        private UserProcess userProcess;
+        public static LoginSession currentLoginSession;
         private const string connectionString = "server=127.0.0.1; database=db_studentattendancesystem; user=root; password=";
 
 
         public LoginPage()
         {
-            InitializeComponent(); ;
+            InitializeComponent(); 
+            userProcess = new UserProcess();
 
             // Menambahkan event handler ketika form ditutup
             this.FormClosing += LoginPage_FormClosing;
@@ -37,6 +40,8 @@ namespace StudentAttendanceSystem
 
             if (LoginUser(email, password))
             {
+                long userID = userProcess.GetUserID(email);
+                currentLoginSession = new LoginSession(email, userProcess.GetUserRole(email), userID);
                 int userRole = GetUserRole(email);
 
                 OpenHomePage(userRole);
@@ -111,6 +116,27 @@ namespace StudentAttendanceSystem
             }
 
             this.Hide(); // Sembunyikan form login setelah login berhasil
+        }
+    }
+
+    public class LoginSession
+    {
+        public long UserID { get; private set; }
+        public string Email { get; private set; }
+        public int UserRole { get; private set; }
+
+        public LoginSession(string email, int userRole, long userID)
+        {
+            Email = email;
+            UserRole = userRole;
+            UserID = userID;
+        }
+
+        public void ClearLoginSession()
+        {
+            Email = null;
+            UserRole = 0;
+            UserID = 0;
         }
     }
 }

@@ -30,7 +30,6 @@
         {
             this.textBoxUserId = new System.Windows.Forms.TextBox();
             this.lblUserId = new System.Windows.Forms.Label();
-            this.textBoxRole = new System.Windows.Forms.TextBox();
             this.lblRole = new System.Windows.Forms.Label();
             this.dataGridViewUser = new System.Windows.Forms.DataGridView();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -44,6 +43,7 @@
             this.lblName = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.btnBack = new System.Windows.Forms.Button();
+            this.comboBoxRole = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUser)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,14 +64,6 @@
             this.lblUserId.Size = new System.Drawing.Size(105, 29);
             this.lblUserId.TabIndex = 32;
             this.lblUserId.Text = "User ID :";
-            // 
-            // textBoxRole
-            // 
-            this.textBoxRole.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxRole.Location = new System.Drawing.Point(198, 256);
-            this.textBoxRole.Name = "textBoxRole";
-            this.textBoxRole.Size = new System.Drawing.Size(381, 35);
-            this.textBoxRole.TabIndex = 5;
             // 
             // lblRole
             // 
@@ -214,15 +206,25 @@
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // comboBoxRole
+            // 
+            this.comboBoxRole.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRole.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxRole.FormattingEnabled = true;
+            this.comboBoxRole.Location = new System.Drawing.Point(198, 256);
+            this.comboBoxRole.Name = "comboBoxRole";
+            this.comboBoxRole.Size = new System.Drawing.Size(381, 37);
+            this.comboBoxRole.TabIndex = 5;
+            // 
             // UserPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(978, 644);
+            this.Controls.Add(this.comboBoxRole);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.textBoxUserId);
             this.Controls.Add(this.lblUserId);
-            this.Controls.Add(this.textBoxRole);
             this.Controls.Add(this.lblRole);
             this.Controls.Add(this.dataGridViewUser);
             this.Controls.Add(this.btnRefresh);
@@ -250,7 +252,6 @@
 
         private System.Windows.Forms.TextBox textBoxUserId;
         private System.Windows.Forms.Label lblUserId;
-        private System.Windows.Forms.TextBox textBoxRole;
         private System.Windows.Forms.Label lblRole;
         private System.Windows.Forms.DataGridView dataGridViewUser;
         private System.Windows.Forms.Button btnRefresh;
@@ -264,5 +265,6 @@
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.ComboBox comboBoxRole;
     }
 }

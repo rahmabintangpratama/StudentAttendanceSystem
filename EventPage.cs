@@ -22,7 +22,7 @@ namespace StudentAttendanceSystem
 
             connect = new Connect();
             eventProcess = new EventProcess();
-            FillComboBoxMatKulName();
+            ComboBoxMatKulNameData();
             refreshData();
         }
 
@@ -32,7 +32,7 @@ namespace StudentAttendanceSystem
             Application.Exit();
         }
 
-        private void FillComboBoxMatKulName()
+        private void ComboBoxMatKulNameData()
         {
             DataTable matkulTable = GetMatKul();
 
@@ -45,13 +45,13 @@ namespace StudentAttendanceSystem
         private DataTable GetMatKul()
         {
             string query = "SELECT KodeMataKuliah, NamaMataKuliah FROM matakuliah";
-            return connect.ExecuteQuery(query);
+            return connect.RetrieveData(query);
         }
 
         private void refreshData()
         {
             string query = "SELECT e.EventID AS Event_ID, e.EventName AS Nama_Event, m.NamaMataKuliah AS Mata_Kuliah, e.venue AS Ruang, e.Tanggal AS Tanggal FROM event e JOIN matakuliah m ON (e.KodeMataKuliah = m.KodeMataKuliah) ORDER BY Tanggal DESC, Nama_Event ASC, Mata_Kuliah ASC";
-            DataTable eventData = connect.ExecuteQuery(query);
+            DataTable eventData = connect.RetrieveData(query);
 
             dataGridViewEvent.DataSource = eventData;
         }
@@ -149,7 +149,7 @@ namespace StudentAttendanceSystem
         {
             int EventID = Convert.ToInt32(textBoxEventID.Text);
 
-            if (DeleteEvent(EventID))
+            if (RemoveEvent(EventID))
             {
                 MessageBox.Show("Event successfuly deleted.");
                 textBoxEventID.Clear();
@@ -162,7 +162,7 @@ namespace StudentAttendanceSystem
             refreshData();
         }
 
-        private bool DeleteEvent(int EventID)
+        private bool RemoveEvent(int EventID)
         {
             try
             {

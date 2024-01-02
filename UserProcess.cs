@@ -18,49 +18,28 @@ namespace StudentAttendanceSystem
             connect = new Connect();
         }
 
-        public bool AuthenticateUser(string email, string password)
+        public void InputUser(string userID, string nama, string email, string password, int Role)
         {
-            string query = $"SELECT * FROM user WHERE email='{email}'";
-            DataTable result = connect.ExecuteQuery(query);
-
-            if (result.Rows.Count > 0)
-            {
-                string PasswordInDatabase = result.Rows[0]["password"].ToString();
-
-                if (password != PasswordInDatabase)
-                {
-                    MessageBox.Show($"Authentication failed.");
-                }
-            }
-
-            return false;
+            string query = $"INSERT INTO user (UserID, Nama, Email, Password, Role) VALUES ('{userID}','{nama}', '{email}', '{password}', '{Role}')";
+            connect.RunCommand(query);
         }
 
-
-
-        public void InputUser(string userID, string nama, string email, string password, string role)
-        {
-            string query = $"INSERT INTO user (UserID, Nama, Email, Password, Role) VALUES ('{userID}','{nama}', '{email}', '{password}', '{role}')";
-            connect.ExecuteNonQuery(query);
-        }
-
-        public void UpdateUser(int UserID, string newNama, string newEmail, string newPassword, string newRole)
+        public void UpdateUser(int UserID, string newNama, string newEmail, string newPassword, int newRole)
         {
             string query = $"UPDATE user SET Nama = '{newNama}', Email = '{newEmail}', Password = '{newPassword}', Role = '{newRole}' WHERE UserID = {UserID}";
-            connect.ExecuteNonQuery(query);
+            connect.RunCommand(query);
         }
-
 
         public void RemoveUser(int UserID)
         {
             string query = $"DELETE FROM user WHERE UserId = {UserID}";
-            connect.ExecuteNonQuery(query);
+            connect.RunCommand(query);
         }
 
         public int GetUserRole(string email)
         {
             string query = $"SELECT role FROM user WHERE email = '{email}'";
-            DataTable result = connect.ExecuteQuery(query);
+            DataTable result = connect.RetrieveData(query);
 
             if (result.Rows.Count > 0)
             {
@@ -70,10 +49,10 @@ namespace StudentAttendanceSystem
             return 0;
         }
 
-        public bool IsEmailAvailable(string email)
+        public bool CheckEmailAvailability(string email)
         {
             string query = $"SELECT COUNT(*) FROM user WHERE email = '{email}'";
-            int userCount = Convert.ToInt32(connect.ExecuteQuery(query).Rows[0][0]);
+            int userCount = Convert.ToInt32(connect.RetrieveData(query).Rows[0][0]);
 
             return userCount == 0;
         }
@@ -81,7 +60,7 @@ namespace StudentAttendanceSystem
         public long GetUserID(string email)
         {
             string query = $"SELECT UserID FROM user WHERE email = '{email}'";
-            DataTable result = connect.ExecuteQuery(query);
+            DataTable result = connect.RetrieveData(query);
 
             if (result.Rows.Count > 0)
             {
@@ -95,7 +74,5 @@ namespace StudentAttendanceSystem
         {
             connect.Dispose();
         }
-
-
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace StudentAttendanceSystem
 {
@@ -22,9 +23,9 @@ namespace StudentAttendanceSystem
 
             connect = new Connect();
             attendanceProcess = new AttendanceProcess();
-            FillComboBoxStudent();
-            FillComboBoxEvent();
-            FillComboBoxStatus();
+            ComboBoxStudentData();
+            ComboBoxEventData();
+            ComboBoxStatusData();
             refreshData();
         }
 
@@ -34,7 +35,7 @@ namespace StudentAttendanceSystem
             Application.Exit();
         }
 
-        private void FillComboBoxStudent()
+        private void ComboBoxStudentData()
         {
             DataTable studentTable = GetStudent();
 
@@ -48,10 +49,10 @@ namespace StudentAttendanceSystem
         {
             long currentUserID = LoginPage.currentLoginSession.UserID;
             string queryStudent = $"SELECT UserID, Nama FROM user WHERE Role = 3 AND UserID = '{currentUserID}'";
-            return connect.ExecuteQuery(queryStudent);
+            return connect.RetrieveData(queryStudent);
         }
 
-        private void FillComboBoxEvent()
+        private void ComboBoxEventData()
         {
             DataTable eventTable = GetEvent();
 
@@ -64,10 +65,10 @@ namespace StudentAttendanceSystem
         private DataTable GetEvent()
         {
             string queryEvent = "SELECT EventID, EventName FROM event";
-            return connect.ExecuteQuery(queryEvent);
+            return connect.RetrieveData(queryEvent);
         }
 
-        private void FillComboBoxStatus()
+        private void ComboBoxStatusData()
         {
             DataTable statusTable = GetStatus();
 
@@ -80,14 +81,14 @@ namespace StudentAttendanceSystem
         private DataTable GetStatus()
         {
             string queryStatus = "SELECT Kehadiran, keterangan FROM status";
-            return connect.ExecuteQuery(queryStatus);
+            return connect.RetrieveData(queryStatus);
         }
 
         private void refreshData()
         {
             long currentUserID = LoginPage.currentLoginSession.UserID;
             string query = $"SELECT p.PresensiID AS Attendance_ID, p.waktu AS Time, e.EventName AS Nama_Event, u.Nama AS Student, s.keterangan AS Status FROM presensi p JOIN event e ON (p.EventID = e.EventID) JOIN user u ON (p.UserID = u.UserID) JOIN status s ON (p.Kehadiran = s.Kehadiran) WHERE p.UserID = '{currentUserID}' ORDER BY Time DESC, e.EventID DESC, Nama_Event ASC, Student ASC";
-            DataTable attendanceData = connect.ExecuteQuery(query);
+            DataTable attendanceData = connect.RetrieveData(query);
 
             dataGridViewAttendance.DataSource = attendanceData;
         }
@@ -172,7 +173,7 @@ namespace StudentAttendanceSystem
         {
             try
             {
-                attendanceProcess.UpdateAttendance(PresensiID, UserID, EventID, Status);
+                attendanceProcess.EditAttendance(PresensiID, UserID, EventID, Status);
                 return true;
             }
             catch (Exception ex)
@@ -186,7 +187,7 @@ namespace StudentAttendanceSystem
         {
             int PresensiID = Convert.ToInt32(textBoxPresensiID.Text);
 
-            if (DeleteAttendance(PresensiID))
+            if (RemoveAttendance(PresensiID))
             {
                 MessageBox.Show("Attendance succesfuly deleted.");
                 textBoxPresensiID.Clear();
@@ -199,7 +200,7 @@ namespace StudentAttendanceSystem
             refreshData();
         }
 
-        private bool DeleteAttendance(int PresensiID)
+        private bool RemoveAttendance(int PresensiID)
         {
             try
             {
@@ -210,6 +211,60 @@ namespace StudentAttendanceSystem
             {
                 Console.WriteLine("Error: " + ex.Message);
                 return false;
+            }
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            ExportToCSV();
+        }
+
+        private void ExportToCSV()
+        {
+            try
+            {
+                // Dapatkan data dari DataGridView
+                DataTable dt = (DataTable)dataGridViewAttendance.DataSource;
+
+                // Buat objek SaveFileDialog
+                SaveFileDialog saveFileDialog = new SaveFileDialog
+                {
+                    // Set ekstensi default dan filter file untuk CSV
+                    DefaultExt = "csv",
+                    Filter = "CSV files (*.csv)|*.csv",
+                    Title = "Save CSV File"
+                };
+
+                // Tampilkan dialog untuk memilih direktori dan nama file
+                DialogResult result = saveFileDialog.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    // Dapatkan path file yang dipilih oleh pengguna
+                    string filePath = saveFileDialog.FileName;
+
+                    // Buat string builder untuk menyimpan data CSV
+                    StringBuilder csvContent = new StringBuilder();
+
+                    // Tambahkan header CSV
+                    csvContent.AppendLine("Attendance_ID,Time,Nama_Event,Student,Status");
+
+                    // Tambahkan baris data ke CSV
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        csvContent.AppendLine($"{row["Attendance_ID"]},{row["Time"]},{row["Nama_Event"]},{row["Student"]},{row["Status"]}");
+                    }
+
+                    // Tulis string CSV ke file
+                    File.WriteAllText(filePath, csvContent.ToString());
+
+                    MessageBox.Show($"Data has been exported to {filePath}", "Export Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                MessageBox.Show("Failed to export data.", "Export Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

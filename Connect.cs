@@ -29,7 +29,7 @@ namespace StudentAttendanceSystem
             connection = new MySqlConnection(connectionString);
         }
 
-        public DataTable ExecuteQuery(string query)
+        public DataTable RetrieveData(string query)
         {
             DataTable dataTable = new DataTable();
 
@@ -56,7 +56,7 @@ namespace StudentAttendanceSystem
             return dataTable;
         }
 
-        public void ExecuteNonQuery(string query)
+        public void RunCommand(string query)
         {
             try
             {
@@ -77,7 +77,6 @@ namespace StudentAttendanceSystem
             }
         }
 
-        // Implement IDisposable interface
         public void Dispose()
         {
             if (connection != null)

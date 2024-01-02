@@ -42,6 +42,7 @@
             this.comboBoxKehadiran = new System.Windows.Forms.ComboBox();
             this.lblKehadiran = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAttendance)).BeginInit();
             this.SuspendLayout();
             // 
@@ -200,11 +201,25 @@
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // btnExport
+            // 
+            this.btnExport.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.btnExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExport.ForeColor = System.Drawing.Color.White;
+            this.btnExport.Location = new System.Drawing.Point(585, 12);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(130, 49);
+            this.btnExport.TabIndex = 40;
+            this.btnExport.Text = "Export";
+            this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
             // AttendancePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(978, 644);
+            this.Controls.Add(this.btnExport);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.comboBoxKehadiran);
             this.Controls.Add(this.lblKehadiran);
@@ -246,5 +261,6 @@
         private System.Windows.Forms.ComboBox comboBoxKehadiran;
         private System.Windows.Forms.Label lblKehadiran;
         private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Button btnExport;
     }
 }

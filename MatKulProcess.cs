@@ -18,13 +18,13 @@ namespace StudentAttendanceSystem
         public void InputMatKul(string MatKul, string MatKulName, string UserID)
         {
             string query = $"INSERT INTO matakuliah (KodeMataKuliah, NamaMataKuliah, UserID) VALUES ('{MatKul}','{MatKulName}','{UserID}')";
-            connect.ExecuteNonQuery(query);
+            connect.RunCommand(query);
         }
 
-        public bool IsMatKulAvailable(string MatKul)
+        public bool CheckMatKulAvailability(string MatKul)
         {
             string query = $"SELECT COUNT(*) FROM matakuliah WHERE KodeMataKuliah = '{MatKul}'";
-            int matkulCount = Convert.ToInt32(connect.ExecuteQuery(query).Rows[0][0]);
+            int matkulCount = Convert.ToInt32(connect.RetrieveData(query).Rows[0][0]);
 
             return matkulCount == 0;
         }
@@ -32,13 +32,13 @@ namespace StudentAttendanceSystem
         public void UpdateMatKul(string MatKul, string MatKulName, string UserID)
         {
             string query = $"UPDATE matakuliah SET NamaMataKuliah = '{MatKulName}', UserID = '{UserID}' WHERE KodeMataKuliah = '{MatKul}'";
-            connect.ExecuteNonQuery(query);
+            connect.RunCommand(query);
         }
 
         public void RemoveMatKul(string MatKul)
         {
             string query = $"DELETE FROM matakuliah WHERE KodeMataKuliah = '{MatKul}'";
-            connect.ExecuteNonQuery(query);
+            connect.RunCommand(query);
         }
 
         public void Dispose()

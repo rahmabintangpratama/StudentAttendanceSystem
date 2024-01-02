@@ -23,11 +23,11 @@ namespace StudentAttendanceSystem
 
             connect = new Connect();
             matkulProcess = new MatKulProcess();
-            FillComboBoxDosenPengampu();
+            ComboBoxDosenPengampuData();
             refreshData();
         }
 
-        private void FillComboBoxDosenPengampu()
+        private void ComboBoxDosenPengampuData()
         {
             DataTable dosenTable = GetDosen();
 
@@ -40,7 +40,7 @@ namespace StudentAttendanceSystem
         private DataTable GetDosen()
         {
             string query = "SELECT UserID, Nama FROM user WHERE Role = 2";
-            return connect.ExecuteQuery(query);
+            return connect.RetrieveData(query);
         }
 
         // Tambahkan event handler untuk FormClosing
@@ -71,7 +71,7 @@ namespace StudentAttendanceSystem
         private void refreshData()
         {
             string query = "SELECT m.KodeMataKuliah AS Kode_Mata_Kuliah, m.NamaMataKuliah AS Mata_Kuliah, u.Nama AS Dosen_Pengampu FROM matakuliah m JOIN user u ON (m.UserID = u.UserID) ORDER BY Kode_Mata_Kuliah ASC";
-            DataTable matkulData = connect.ExecuteQuery(query);
+            DataTable matkulData = connect.RetrieveData(query);
 
             dataGridViewMatKul.DataSource = matkulData;
         }
@@ -101,9 +101,8 @@ namespace StudentAttendanceSystem
         {
             try
             {
-                if (IsMatKulAvailable(MatKul))
+                if (CheckMatKulAvailability(MatKul))
                 {
-                    // Tambahkan user baru
                     matkulProcess.InputMatKul(MatKul, MatKulName, UserID);
                     return true;
                 }
@@ -120,11 +119,10 @@ namespace StudentAttendanceSystem
             }
         }
 
-        private bool IsMatKulAvailable(string MatKul)
+        private bool CheckMatKulAvailability(string MatKul)
         {
             MatKulProcess matkulProcess = new MatKulProcess();
-            // Cek apakah email ada dalam database
-            return matkulProcess.IsMatKulAvailable(MatKul);
+            return matkulProcess.CheckMatKulAvailability(MatKul);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -166,7 +164,7 @@ namespace StudentAttendanceSystem
         {
             string MatKul = textBoxMatKul.Text;
 
-            if (DeleteMatKul(MatKul))
+            if (RemoveMatKul(MatKul))
             {
                 MessageBox.Show("\"Mata Kuliah\" Successfuly Deleted.");
                 textBoxMatKul.Clear();
@@ -179,7 +177,7 @@ namespace StudentAttendanceSystem
             refreshData();
         }
 
-        private bool DeleteMatKul(string MatKul)
+        private bool RemoveMatKul(string MatKul)
         {
             try
             {

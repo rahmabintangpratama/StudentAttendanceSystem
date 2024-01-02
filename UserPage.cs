@@ -22,6 +22,7 @@ namespace StudentAttendanceSystem
 
             connect = new Connect();
             userProcess = new UserProcess();
+            ComboBoxRoleData();
             refreshData();
         }
 
@@ -29,6 +30,22 @@ namespace StudentAttendanceSystem
         private void UserPage_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void ComboBoxRoleData()
+        {
+            DataTable roleTable = GetRole();
+
+            comboBoxRole.DisplayMember = "job";
+            comboBoxRole.ValueMember = "Role";
+
+            comboBoxRole.DataSource = roleTable;
+        }
+
+        private DataTable GetRole()
+        {
+            string queryRole = "SELECT Role, job FROM role_value";
+            return connect.RetrieveData(queryRole);
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -52,8 +69,8 @@ namespace StudentAttendanceSystem
 
         private void refreshData()
         {
-            string query = "SELECT UserID, Nama, Email, Role FROM user ORDER BY Role ASC, UserID ASC";
-            DataTable userData = connect.ExecuteQuery(query);
+            string query = "SELECT u.UserID AS UserID, u.Nama AS Nama, u.Email AS Email, r.job AS Role FROM user u JOIN role_value r ON (u.Role = r.Role) ORDER BY Role ASC, UserID ASC";
+            DataTable userData = connect.RetrieveData(query);
 
             dataGridViewUser.DataSource = userData;
         }
@@ -64,16 +81,16 @@ namespace StudentAttendanceSystem
             string nama = textBoxName.Text;
             string email = textBoxEmail.Text;
             string password = textBoxPassword.Text;
-            string role = textBoxRole.Text;
-            
-            if (AddUser(userID, nama, email, password, role))
+            DataRowView selectedRole = (DataRowView)comboBoxRole.SelectedItem;
+            int Role = Convert.ToInt32(selectedRole["Role"]);
+
+            if (AddUser(userID, nama, email, password, Role))
             {
                 MessageBox.Show("Account successfuly added.");
                 textBoxUserId.Clear();
                 textBoxName.Clear();
                 textBoxEmail.Clear();
                 textBoxPassword.Clear();
-                textBoxRole.Clear();
             }
             else
             {
@@ -83,14 +100,13 @@ namespace StudentAttendanceSystem
             refreshData();
         }
 
-        private bool AddUser(string userID, string nama, string email, string password, string role)
+        private bool AddUser(string userID, string nama, string email, string password, int Role)
         {
             try
             {
-                if (IsEmailAvailable(email))
+                if (CheckEmailAvailability(email))
                 {
-                    // Tambahkan user baru
-                    userProcess.InputUser(userID, nama, email, password, role);
+                    userProcess.InputUser(userID, nama, email, password, Role);
                     return true;
                 }
                 else
@@ -106,11 +122,10 @@ namespace StudentAttendanceSystem
             }
         }
 
-        private bool IsEmailAvailable(string email)
+        private bool CheckEmailAvailability(string email)
         {
             UserProcess userProcess = new UserProcess();
-            // Cek apakah email ada dalam database
-            return userProcess.IsEmailAvailable(email);
+            return userProcess.CheckEmailAvailability(email);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -119,16 +134,16 @@ namespace StudentAttendanceSystem
             string nama = textBoxName.Text;
             string email = textBoxEmail.Text;
             string password = textBoxPassword.Text;
-            string role = textBoxRole.Text;
+            DataRowView selectedRole = (DataRowView)comboBoxRole.SelectedItem;
+            int Role = Convert.ToInt32(selectedRole["Role"]);
 
-            if (UpdateUser(UserID, nama, email, password, role))
+            if (UpdateUser(UserID, nama, email, password, Role))
             {
                 MessageBox.Show("Account successfuly edited.");
                 textBoxUserId.Clear();
                 textBoxName.Clear();
                 textBoxEmail.Clear();
                 textBoxPassword.Clear();
-                textBoxRole.Clear();
             }
             else
             {
@@ -138,11 +153,11 @@ namespace StudentAttendanceSystem
             refreshData();
         }
 
-        private bool UpdateUser(int UserID, string nama, string email, string password, string role)
+        private bool UpdateUser(int UserID, string nama, string email, string password, int Role)
         {
             try
             {
-                userProcess.UpdateUser(UserID, nama, email, password, role);
+                userProcess.UpdateUser(UserID, nama, email, password, Role);
                 return true;
             }
             catch (Exception ex)
@@ -160,6 +175,9 @@ namespace StudentAttendanceSystem
             {
                 MessageBox.Show("Account Successfuly Deleted.");
                 textBoxUserId.Clear();
+                textBoxName.Clear();
+                textBoxEmail.Clear();
+                textBoxPassword.Clear();
             }
             else
             {

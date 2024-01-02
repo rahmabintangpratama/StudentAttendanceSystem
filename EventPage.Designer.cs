@@ -241,7 +241,7 @@
             this.MaximumSize = new System.Drawing.Size(1000, 700);
             this.MinimumSize = new System.Drawing.Size(1000, 700);
             this.Name = "EventPage";
-            this.Text = "EventPage";
+            this.Text = "Event";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEvent)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -28,7 +28,7 @@ namespace StudentAttendanceSystem
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             // Tampilkan dialog konfirmasi sebelum menutup form
-            DialogResult result = MessageBox.Show("Are you sure you want to close this log out?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Are you sure you want to log out?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {

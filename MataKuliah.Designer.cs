@@ -197,7 +197,7 @@
             this.MaximumSize = new System.Drawing.Size(1000, 700);
             this.MinimumSize = new System.Drawing.Size(1000, 700);
             this.Name = "MataKuliah";
-            this.Text = "MataKuliah";
+            this.Text = "Mata Kuliah";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMatKul)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

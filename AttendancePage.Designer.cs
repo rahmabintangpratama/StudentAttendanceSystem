@@ -238,7 +238,7 @@
             this.MaximumSize = new System.Drawing.Size(1000, 700);
             this.MinimumSize = new System.Drawing.Size(1000, 700);
             this.Name = "AttendancePage";
-            this.Text = "AttendancePage";
+            this.Text = "Attendance";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAttendance)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

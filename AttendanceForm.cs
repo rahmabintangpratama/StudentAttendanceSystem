@@ -14,6 +14,7 @@ namespace StudentAttendanceSystem
     public partial class AttendanceForm : Form
     {
         private Connect connect;
+        public static LoginSession loginSession;
         private AttendanceProcess attendanceProcess;
         public AttendanceForm()
         {
@@ -62,7 +63,8 @@ namespace StudentAttendanceSystem
 
         private DataTable GetEvent()
         {
-            string queryEvent = "SELECT EventID, EventName FROM event";
+            long currentUserID = LoginPage.currentLoginSession.UserID;
+            String queryEvent = $"SELECT e.EventID, e.EventName FROM matakuliah m JOIN event e ON (m.KodeMataKuliah = e.KodeMataKuliah) JOIN user u ON (m.UserID = u.UserID) WHERE m.UserID = {currentUserID}";
             return connect.ExecuteQuery(queryEvent);
         }
 

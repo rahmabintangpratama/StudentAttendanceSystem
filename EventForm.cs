@@ -124,6 +124,7 @@ namespace StudentAttendanceSystem
             if (EditEvent(EventID, Event, kodeMK, Ruang, selectedTanggal))
             {
                 MessageBox.Show("Event successfuly edited.");
+                textBoxEventID.Clear();
                 textBoxEvent.Clear();
                 textBoxRuang.Clear();
             }
@@ -162,6 +163,8 @@ namespace StudentAttendanceSystem
             {
                 MessageBox.Show("Event failed to be deleted.");
             }
+
+            displayData();
         }
 
         private bool DeleteEvent(int EventID)

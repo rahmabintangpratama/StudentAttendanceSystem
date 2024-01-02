@@ -117,6 +117,12 @@ namespace StudentAttendanceSystem
 
             this.Hide(); // Sembunyikan form login setelah login berhasil
         }
+
+        private void textBoxPassword_TextChanged(object sender, EventArgs e)
+        {
+            textBoxPassword.ForeColor = Color.Black;
+            textBoxPassword.PasswordChar = '●';
+        }
     }
 
     public class LoginSession

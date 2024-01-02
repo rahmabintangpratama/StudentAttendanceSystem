@@ -24,10 +24,10 @@ namespace StudentAttendanceSystem
             Application.Exit();
         }
 
-        private void btnBack_Click(object sender, EventArgs e)
+        private void btnLogOut_Click(object sender, EventArgs e)
         {
             // Tampilkan dialog konfirmasi sebelum menutup form
-            DialogResult result = MessageBox.Show("Are you sure you want to close this page?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Are you sure you want to log out?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
@@ -35,9 +35,6 @@ namespace StudentAttendanceSystem
                 LoginPage loginPage = new LoginPage();
                 loginPage.Show();
                 this.Hide();
-            }
-            else
-            {
             }
         }
 

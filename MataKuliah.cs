@@ -24,7 +24,7 @@ namespace StudentAttendanceSystem
             connect = new Connect();
             matkulProcess = new MatKulProcess();
             FillComboBoxDosenPengampu();
-            displayData();
+            refreshData();
         }
 
         private void FillComboBoxDosenPengampu()
@@ -61,17 +61,14 @@ namespace StudentAttendanceSystem
                 adminPage.Show();
                 this.Hide();
             }
-            else
-            {
-            }
         }
 
-        private void btnDisplay_Click(object sender, EventArgs e)
+        private void btnRefresh_Click(object sender, EventArgs e)
         {
-            displayData();
+            refreshData();
         }
 
-        private void displayData()
+        private void refreshData()
         {
             string query = "SELECT m.KodeMataKuliah AS Kode_Mata_Kuliah, m.NamaMataKuliah AS Mata_Kuliah, u.Nama AS Dosen_Pengampu FROM matakuliah m JOIN user u ON (m.UserID = u.UserID) ORDER BY Kode_Mata_Kuliah ASC";
             DataTable matkulData = connect.ExecuteQuery(query);
@@ -97,7 +94,7 @@ namespace StudentAttendanceSystem
                 MessageBox.Show("\"Mata Kuliah\" failed to be added.");
             }
 
-            displayData();
+            refreshData();
         }
 
         private bool AddMatKul(string MatKul, string MatKulName, string UserID)
@@ -148,7 +145,7 @@ namespace StudentAttendanceSystem
                 MessageBox.Show("\"Mata Kuliah\" Failed to be edited.");
             }
 
-            displayData();
+            refreshData();
         }
 
         private bool UpdateMatKul(string MatKul, string MatKulName, string UserID)
@@ -179,7 +176,7 @@ namespace StudentAttendanceSystem
                 MessageBox.Show("\"Mata Kuliah\" failed to be deleted.");
             }
 
-            displayData();
+            refreshData();
         }
 
         private bool DeleteMatKul(string MatKul)

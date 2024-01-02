@@ -22,7 +22,7 @@ namespace StudentAttendanceSystem
 
             connect = new Connect();
             userProcess = new UserProcess();
-            displayData();
+            refreshData();
         }
 
         // Tambahkan event handler untuk FormClosing
@@ -43,17 +43,14 @@ namespace StudentAttendanceSystem
                 adminPage.Show();
                 this.Hide();
             }
-            else
-            {
-            }
         }
 
-        private void btnDisplay_Click(object sender, EventArgs e)
+        private void btnRefresh_Click(object sender, EventArgs e)
         {
-            displayData();
+            refreshData();
         }
 
-        private void displayData()
+        private void refreshData()
         {
             string query = "SELECT UserID, Nama, Email, Role FROM user ORDER BY Role ASC, UserID ASC";
             DataTable userData = connect.ExecuteQuery(query);
@@ -83,7 +80,7 @@ namespace StudentAttendanceSystem
                 MessageBox.Show("Account failed to be added.");
             }
 
-            displayData();
+            refreshData();
         }
 
         private bool AddUser(string userID, string nama, string email, string password, string role)
@@ -138,7 +135,7 @@ namespace StudentAttendanceSystem
                 MessageBox.Show("Account Failed to be edited.");
             }
 
-            displayData();
+            refreshData();
         }
 
         private bool UpdateUser(int UserID, string nama, string email, string password, string role)
@@ -169,7 +166,7 @@ namespace StudentAttendanceSystem
                 MessageBox.Show("Account failed to be deleted.");
             }
 
-            displayData();
+            refreshData();
         }
 
         private bool DeleteUser(int UserID)

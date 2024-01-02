@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnDisplay = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.textBoxEventID = new System.Windows.Forms.TextBox();
             this.lblEventID = new System.Windows.Forms.Label();
             this.dateTimePickerTanggal = new System.Windows.Forms.DateTimePicker();
@@ -47,156 +47,181 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEvent)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnDisplay
+            // btnRefresh
             // 
-            this.btnDisplay.Location = new System.Drawing.Point(670, 148);
-            this.btnDisplay.Name = "btnDisplay";
-            this.btnDisplay.Size = new System.Drawing.Size(114, 48);
-            this.btnDisplay.TabIndex = 84;
-            this.btnDisplay.Text = "Display";
-            this.btnDisplay.UseVisualStyleBackColor = true;
-            this.btnDisplay.Click += new System.EventHandler(this.btnDisplay_Click);
+            this.btnRefresh.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefresh.ForeColor = System.Drawing.Color.White;
+            this.btnRefresh.Location = new System.Drawing.Point(710, 210);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(130, 49);
+            this.btnRefresh.TabIndex = 9;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // textBoxEventID
             // 
-            this.textBoxEventID.Location = new System.Drawing.Point(198, 12);
+            this.textBoxEventID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxEventID.Location = new System.Drawing.Point(198, 19);
             this.textBoxEventID.Name = "textBoxEventID";
-            this.textBoxEventID.Size = new System.Drawing.Size(235, 26);
-            this.textBoxEventID.TabIndex = 83;
+            this.textBoxEventID.Size = new System.Drawing.Size(381, 35);
+            this.textBoxEventID.TabIndex = 1;
             // 
             // lblEventID
             // 
             this.lblEventID.AutoSize = true;
-            this.lblEventID.Location = new System.Drawing.Point(18, 18);
+            this.lblEventID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEventID.Location = new System.Drawing.Point(7, 22);
             this.lblEventID.Name = "lblEventID";
-            this.lblEventID.Size = new System.Drawing.Size(71, 20);
+            this.lblEventID.Size = new System.Drawing.Size(114, 29);
             this.lblEventID.TabIndex = 82;
-            this.lblEventID.Text = "Event ID";
+            this.lblEventID.Text = "Event ID :";
             // 
             // dateTimePickerTanggal
             // 
-            this.dateTimePickerTanggal.Location = new System.Drawing.Point(198, 156);
+            this.dateTimePickerTanggal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerTanggal.Location = new System.Drawing.Point(198, 256);
             this.dateTimePickerTanggal.Name = "dateTimePickerTanggal";
-            this.dateTimePickerTanggal.Size = new System.Drawing.Size(235, 26);
-            this.dateTimePickerTanggal.TabIndex = 81;
+            this.dateTimePickerTanggal.Size = new System.Drawing.Size(381, 35);
+            this.dateTimePickerTanggal.TabIndex = 5;
             // 
             // lblDate
             // 
             this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(18, 162);
+            this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDate.Location = new System.Drawing.Point(7, 261);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(66, 20);
+            this.lblDate.Size = new System.Drawing.Size(114, 29);
             this.lblDate.TabIndex = 80;
-            this.lblDate.Text = "Tanggal";
+            this.lblDate.Text = "Tanggal :";
             // 
             // comboBoxMatKulName
             // 
             this.comboBoxMatKulName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMatKulName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxMatKulName.FormattingEnabled = true;
-            this.comboBoxMatKulName.Location = new System.Drawing.Point(198, 82);
+            this.comboBoxMatKulName.Location = new System.Drawing.Point(198, 135);
             this.comboBoxMatKulName.Name = "comboBoxMatKulName";
-            this.comboBoxMatKulName.Size = new System.Drawing.Size(235, 28);
-            this.comboBoxMatKulName.TabIndex = 79;
+            this.comboBoxMatKulName.Size = new System.Drawing.Size(381, 37);
+            this.comboBoxMatKulName.TabIndex = 3;
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(670, 12);
+            this.btnBack.BackColor = System.Drawing.Color.Sienna;
+            this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.ForeColor = System.Drawing.Color.White;
+            this.btnBack.Location = new System.Drawing.Point(836, 12);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(114, 48);
-            this.btnBack.TabIndex = 78;
+            this.btnBack.Size = new System.Drawing.Size(130, 49);
+            this.btnBack.TabIndex = 10;
             this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // textBoxEvent
             // 
-            this.textBoxEvent.Location = new System.Drawing.Point(198, 48);
+            this.textBoxEvent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxEvent.Location = new System.Drawing.Point(198, 77);
             this.textBoxEvent.Name = "textBoxEvent";
-            this.textBoxEvent.Size = new System.Drawing.Size(235, 26);
-            this.textBoxEvent.TabIndex = 77;
+            this.textBoxEvent.Size = new System.Drawing.Size(381, 35);
+            this.textBoxEvent.TabIndex = 2;
             // 
             // lblEventName
             // 
             this.lblEventName.AutoSize = true;
-            this.lblEventName.Location = new System.Drawing.Point(18, 54);
+            this.lblEventName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEventName.Location = new System.Drawing.Point(7, 80);
             this.lblEventName.Name = "lblEventName";
-            this.lblEventName.Size = new System.Drawing.Size(96, 20);
+            this.lblEventName.Size = new System.Drawing.Size(155, 29);
             this.lblEventName.TabIndex = 76;
-            this.lblEventName.Text = "Nama Event";
+            this.lblEventName.Text = "Nama Event :";
             // 
             // dataGridViewEvent
             // 
             this.dataGridViewEvent.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewEvent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewEvent.Location = new System.Drawing.Point(16, 208);
+            this.dataGridViewEvent.Location = new System.Drawing.Point(12, 309);
             this.dataGridViewEvent.Name = "dataGridViewEvent";
             this.dataGridViewEvent.ReadOnly = true;
             this.dataGridViewEvent.RowHeadersWidth = 62;
             this.dataGridViewEvent.RowTemplate.Height = 28;
-            this.dataGridViewEvent.Size = new System.Drawing.Size(768, 230);
+            this.dataGridViewEvent.Size = new System.Drawing.Size(954, 323);
             this.dataGridViewEvent.TabIndex = 75;
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(476, 147);
+            this.btnDelete.BackColor = System.Drawing.Color.Red;
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.ForeColor = System.Drawing.Color.White;
+            this.btnDelete.Location = new System.Drawing.Point(836, 162);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(114, 48);
-            this.btnDelete.TabIndex = 74;
+            this.btnDelete.Size = new System.Drawing.Size(130, 49);
+            this.btnDelete.TabIndex = 8;
             this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(670, 78);
+            this.btnUpdate.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate.ForeColor = System.Drawing.Color.White;
+            this.btnUpdate.Location = new System.Drawing.Point(585, 162);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(114, 48);
-            this.btnUpdate.TabIndex = 73;
+            this.btnUpdate.Size = new System.Drawing.Size(130, 49);
+            this.btnUpdate.TabIndex = 7;
             this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(476, 78);
+            this.btnAdd.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.ForeColor = System.Drawing.Color.White;
+            this.btnAdd.Location = new System.Drawing.Point(710, 114);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(114, 48);
-            this.btnAdd.TabIndex = 72;
+            this.btnAdd.Size = new System.Drawing.Size(130, 49);
+            this.btnAdd.TabIndex = 6;
             this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // lblVenue
             // 
             this.lblVenue.AutoSize = true;
-            this.lblVenue.Location = new System.Drawing.Point(18, 122);
+            this.lblVenue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVenue.Location = new System.Drawing.Point(7, 199);
             this.lblVenue.Name = "lblVenue";
-            this.lblVenue.Size = new System.Drawing.Size(57, 20);
+            this.lblVenue.Size = new System.Drawing.Size(95, 29);
             this.lblVenue.TabIndex = 71;
-            this.lblVenue.Text = "Ruang";
+            this.lblVenue.Text = "Ruang :";
             // 
             // lblMatKulName
             // 
             this.lblMatKulName.AutoSize = true;
-            this.lblMatKulName.Location = new System.Drawing.Point(18, 85);
+            this.lblMatKulName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMatKulName.Location = new System.Drawing.Point(7, 138);
             this.lblMatKulName.Name = "lblMatKulName";
-            this.lblMatKulName.Size = new System.Drawing.Size(138, 20);
+            this.lblMatKulName.Size = new System.Drawing.Size(169, 29);
             this.lblMatKulName.TabIndex = 70;
-            this.lblMatKulName.Text = "Nama Mata Kuliah";
+            this.lblMatKulName.Text = "Nama MatKul :";
             // 
             // textBoxRuang
             // 
-            this.textBoxRuang.Location = new System.Drawing.Point(198, 119);
+            this.textBoxRuang.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxRuang.Location = new System.Drawing.Point(198, 196);
             this.textBoxRuang.Name = "textBoxRuang";
-            this.textBoxRuang.Size = new System.Drawing.Size(235, 26);
-            this.textBoxRuang.TabIndex = 69;
+            this.textBoxRuang.Size = new System.Drawing.Size(381, 35);
+            this.textBoxRuang.TabIndex = 4;
             // 
             // EventForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnDisplay);
+            this.ClientSize = new System.Drawing.Size(978, 644);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.textBoxEventID);
             this.Controls.Add(this.lblEventID);
             this.Controls.Add(this.dateTimePickerTanggal);
@@ -212,6 +237,9 @@
             this.Controls.Add(this.lblVenue);
             this.Controls.Add(this.lblMatKulName);
             this.Controls.Add(this.textBoxRuang);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1000, 700);
+            this.MinimumSize = new System.Drawing.Size(1000, 700);
             this.Name = "EventForm";
             this.Text = "EventForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEvent)).EndInit();
@@ -222,7 +250,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnDisplay;
+        private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.TextBox textBoxEventID;
         private System.Windows.Forms.Label lblEventID;
         private System.Windows.Forms.DateTimePicker dateTimePickerTanggal;

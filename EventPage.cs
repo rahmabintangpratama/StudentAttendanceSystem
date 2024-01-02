@@ -23,7 +23,7 @@ namespace StudentAttendanceSystem
             connect = new Connect();
             eventProcess = new EventProcess();
             FillComboBoxMatKulName();
-            displayData();
+            refreshData();
         }
 
         // Tambahkan event handler untuk FormClosing
@@ -48,7 +48,7 @@ namespace StudentAttendanceSystem
             return connect.ExecuteQuery(query);
         }
 
-        private void displayData()
+        private void refreshData()
         {
             string query = "SELECT e.EventID AS Event_ID, e.EventName AS Nama_Event, m.NamaMataKuliah AS Mata_Kuliah, e.venue AS Ruang, e.Tanggal AS Tanggal FROM event e JOIN matakuliah m ON (e.KodeMataKuliah = m.KodeMataKuliah) ORDER BY Tanggal DESC, Nama_Event ASC, Mata_Kuliah ASC";
             DataTable eventData = connect.ExecuteQuery(query);
@@ -68,9 +68,6 @@ namespace StudentAttendanceSystem
                 AdministratorPage adminPage = new AdministratorPage();
                 adminPage.Show();
                 this.Hide();
-            }
-            else
-            {
             }
         }
 
@@ -93,7 +90,7 @@ namespace StudentAttendanceSystem
                 MessageBox.Show("Event failed to be added.");
             }
 
-            displayData();
+            refreshData();
         }
 
         private bool AddEvent(string Event, string kodeMK, string Ruang, DateTime selectedTanggal)
@@ -131,7 +128,7 @@ namespace StudentAttendanceSystem
                 MessageBox.Show("Event failed to be edited.");
             }
 
-            displayData();
+            refreshData();
         }
 
         private bool EditEvent(int EventID, string Event, string kodeMK, string Ruang, DateTime selectedTanggal)
@@ -162,7 +159,7 @@ namespace StudentAttendanceSystem
                 MessageBox.Show("Event failed to be deleted.");
             }
 
-            displayData();
+            refreshData();
         }
 
         private bool DeleteEvent(int EventID)
@@ -179,9 +176,9 @@ namespace StudentAttendanceSystem
             }
         }
 
-        private void btnDisplay_Click(object sender, EventArgs e)
+        private void btnRefresh_Click(object sender, EventArgs e)
         {
-            displayData();
+            refreshData();
         }
     }
 }

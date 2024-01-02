@@ -31,75 +31,88 @@
             this.btnPresensi = new System.Windows.Forms.Button();
             this.btnMatkul = new System.Windows.Forms.Button();
             this.btnUser = new System.Windows.Forms.Button();
-            this.btnBack = new System.Windows.Forms.Button();
+            this.btnLogOut = new System.Windows.Forms.Button();
             this.btnEvent = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnPresensi
             // 
+            this.btnPresensi.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.btnPresensi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPresensi.Location = new System.Drawing.Point(550, 201);
+            this.btnPresensi.ForeColor = System.Drawing.Color.White;
+            this.btnPresensi.Location = new System.Drawing.Point(12, 110);
             this.btnPresensi.Name = "btnPresensi";
             this.btnPresensi.Size = new System.Drawing.Size(130, 49);
-            this.btnPresensi.TabIndex = 16;
+            this.btnPresensi.TabIndex = 3;
             this.btnPresensi.Text = "Presensi";
-            this.btnPresensi.UseVisualStyleBackColor = true;
+            this.btnPresensi.UseVisualStyleBackColor = false;
             this.btnPresensi.Click += new System.EventHandler(this.btnPresensi_Click);
             // 
             // btnMatkul
             // 
+            this.btnMatkul.BackColor = System.Drawing.Color.Sienna;
             this.btnMatkul.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMatkul.Location = new System.Drawing.Point(308, 201);
+            this.btnMatkul.ForeColor = System.Drawing.Color.White;
+            this.btnMatkul.Location = new System.Drawing.Point(198, 29);
             this.btnMatkul.Name = "btnMatkul";
             this.btnMatkul.Size = new System.Drawing.Size(182, 49);
-            this.btnMatkul.TabIndex = 15;
+            this.btnMatkul.TabIndex = 2;
             this.btnMatkul.Text = "Mata Kuliah";
-            this.btnMatkul.UseVisualStyleBackColor = true;
+            this.btnMatkul.UseVisualStyleBackColor = false;
             this.btnMatkul.Click += new System.EventHandler(this.btnMatkul_Click);
             // 
             // btnUser
             // 
+            this.btnUser.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUser.Location = new System.Drawing.Point(121, 201);
+            this.btnUser.ForeColor = System.Drawing.Color.White;
+            this.btnUser.Location = new System.Drawing.Point(12, 29);
             this.btnUser.Name = "btnUser";
             this.btnUser.Size = new System.Drawing.Size(130, 49);
-            this.btnUser.TabIndex = 14;
+            this.btnUser.TabIndex = 1;
             this.btnUser.Text = "User";
-            this.btnUser.UseVisualStyleBackColor = true;
+            this.btnUser.UseVisualStyleBackColor = false;
             this.btnUser.Click += new System.EventHandler(this.btnUser_Click);
             // 
-            // btnBack
+            // btnLogOut
             // 
-            this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBack.Location = new System.Drawing.Point(335, 360);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(130, 49);
-            this.btnBack.TabIndex = 17;
-            this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = true;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            this.btnLogOut.BackColor = System.Drawing.Color.Red;
+            this.btnLogOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogOut.ForeColor = System.Drawing.Color.White;
+            this.btnLogOut.Location = new System.Drawing.Point(436, 29);
+            this.btnLogOut.Name = "btnLogOut";
+            this.btnLogOut.Size = new System.Drawing.Size(130, 49);
+            this.btnLogOut.TabIndex = 5;
+            this.btnLogOut.Text = "Log Out";
+            this.btnLogOut.UseVisualStyleBackColor = false;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
             // btnEvent
             // 
+            this.btnEvent.BackColor = System.Drawing.Color.DarkOrange;
             this.btnEvent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEvent.Location = new System.Drawing.Point(308, 282);
+            this.btnEvent.ForeColor = System.Drawing.Color.White;
+            this.btnEvent.Location = new System.Drawing.Point(198, 110);
             this.btnEvent.Name = "btnEvent";
             this.btnEvent.Size = new System.Drawing.Size(182, 49);
-            this.btnEvent.TabIndex = 18;
+            this.btnEvent.TabIndex = 4;
             this.btnEvent.Text = "Event";
-            this.btnEvent.UseVisualStyleBackColor = true;
+            this.btnEvent.UseVisualStyleBackColor = false;
             this.btnEvent.Click += new System.EventHandler(this.btnEvent_Click);
             // 
             // AdministratorPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(578, 185);
             this.Controls.Add(this.btnEvent);
-            this.Controls.Add(this.btnBack);
+            this.Controls.Add(this.btnLogOut);
             this.Controls.Add(this.btnPresensi);
             this.Controls.Add(this.btnMatkul);
             this.Controls.Add(this.btnUser);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(600, 241);
+            this.MinimumSize = new System.Drawing.Size(600, 241);
             this.Name = "AdministratorPage";
             this.Text = "Administrator Page";
             this.ResumeLayout(false);
@@ -111,7 +124,7 @@
         private System.Windows.Forms.Button btnPresensi;
         private System.Windows.Forms.Button btnMatkul;
         private System.Windows.Forms.Button btnUser;
-        private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Button btnLogOut;
         private System.Windows.Forms.Button btnEvent;
     }
 }

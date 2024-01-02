@@ -23,7 +23,7 @@ namespace StudentAttendanceSystem
             connect = new Connect();
             eventProcess = new EventProcess();
             FillComboBoxMatKulName();
-            displayData();
+            refreshData();
         }
 
         // Tambahkan event handler untuk FormClosing
@@ -49,7 +49,7 @@ namespace StudentAttendanceSystem
             return connect.ExecuteQuery(query);
         }
 
-        private void displayData()
+        private void refreshData()
         {
             long currentUserID = LoginPage.currentLoginSession.UserID;
             string query = $"SELECT e.EventID AS Event_ID, e.EventName AS Nama_Event, m.NamaMataKuliah AS Mata_Kuliah, e.venue AS Ruang, e.Tanggal AS Tanggal FROM matakuliah m JOIN event e ON (m.KodeMataKuliah = e.KodeMataKuliah) JOIN user u ON (m.UserID = u.UserID) WHERE m.UserID = {currentUserID} ORDER BY Tanggal DESC, Nama_Event ASC, Mata_Kuliah ASC";
@@ -71,9 +71,11 @@ namespace StudentAttendanceSystem
                 lecturerPage.Show();
                 this.Hide();
             }
-            else
-            {
-            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            refreshData();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -95,7 +97,7 @@ namespace StudentAttendanceSystem
                 MessageBox.Show("Event failed to be added.");
             }
 
-            displayData();
+            refreshData();
         }
 
         private bool AddEvent(string Event, string kodeMK, string Ruang, DateTime selectedTanggal)
@@ -133,7 +135,7 @@ namespace StudentAttendanceSystem
                 MessageBox.Show("Event failed to be edited.");
             }
 
-            displayData();
+            refreshData();
         }
 
         private bool EditEvent(int EventID, string Event, string kodeMK, string Ruang, DateTime selectedTanggal)
@@ -164,7 +166,7 @@ namespace StudentAttendanceSystem
                 MessageBox.Show("Event failed to be deleted.");
             }
 
-            displayData();
+            refreshData();
         }
 
         private bool DeleteEvent(int EventID)
@@ -179,11 +181,6 @@ namespace StudentAttendanceSystem
                 Console.WriteLine("Error: " + ex.Message);
                 return false;
             }
-        }
-
-        private void btnDisplay_Click(object sender, EventArgs e)
-        {
-            displayData();
         }
     }
 }

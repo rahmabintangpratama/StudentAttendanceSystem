@@ -26,7 +26,7 @@ namespace StudentAttendanceSystem
             FillComboBoxStudent();
             FillComboBoxEvent();
             FillComboBoxStatus();
-            displayData();
+            refreshData();
         }
 
         // Tambahkan event handler untuk FormClosing
@@ -84,7 +84,7 @@ namespace StudentAttendanceSystem
             return connect.ExecuteQuery(queryStatus);
         }
 
-        private void displayData()
+        private void refreshData()
         {
             string query = "SELECT p.PresensiID AS Attendance_ID, p.waktu AS Time, e.EventName AS Nama_Event, u.Nama AS Student, s.keterangan AS Status FROM presensi p JOIN event e ON (p.EventID = e.EventID) JOIN user u ON (p.UserID = u.UserID) JOIN status s ON (p.Kehadiran = s.Kehadiran) ORDER BY Time DESC, e.EventID DESC, Nama_Event ASC, Student ASC";
             DataTable attendanceData = connect.ExecuteQuery(query);
@@ -92,9 +92,9 @@ namespace StudentAttendanceSystem
             dataGridViewAttendance.DataSource = attendanceData;
         }
 
-        private void btnDisplay_Click(object sender, EventArgs e)
+        private void btnRefresh_Click(object sender, EventArgs e)
         {
-            displayData();
+            refreshData();
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -109,9 +109,6 @@ namespace StudentAttendanceSystem
                 LecturerPage lecturerPage = new LecturerPage();
                 lecturerPage.Show();
                 this.Hide();
-            }
-            else
-            {
             }
         }
 
@@ -133,7 +130,7 @@ namespace StudentAttendanceSystem
                 MessageBox.Show("Attendance failed to be added.");
             }
 
-            displayData();
+            refreshData();
         }
 
         private bool AddAttendance(long UserID, int EventID, int Status)
@@ -169,7 +166,7 @@ namespace StudentAttendanceSystem
                 MessageBox.Show("Attendance failed to be edited.");
             }
 
-            displayData();
+            refreshData();
         }
 
         private bool EditAttendance(int PresensiID, long UserID, int EventID, int Status)
@@ -200,7 +197,7 @@ namespace StudentAttendanceSystem
                 MessageBox.Show("Attendance failed to be deleted.");
             }
 
-            displayData();
+            refreshData();
         }
 
         private bool DeleteAttendance(int PresensiID)

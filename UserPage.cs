@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Security.Cryptography;
 
 namespace StudentAttendanceSystem
 {
@@ -173,7 +174,6 @@ namespace StudentAttendanceSystem
 
             if (DeleteUser(UserID))
             {
-                MessageBox.Show("Account Successfuly Deleted.");
                 textBoxUserId.Clear();
                 textBoxName.Clear();
                 textBoxEmail.Clear();

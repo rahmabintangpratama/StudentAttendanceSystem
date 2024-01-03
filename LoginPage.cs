@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Security.Cryptography;
 
 namespace StudentAttendanceSystem
 {
@@ -58,17 +59,50 @@ namespace StudentAttendanceSystem
             {
                 connection.Open();
 
-                string query = "SELECT Role FROM User WHERE Email = @Email AND Password = @Password";
+                // Perbarui perintah SQL untuk menggunakan parameter dengan benar
+                string query = "SELECT Password, Role FROM user WHERE Email = @Email";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
+                    // Pastikan parameter @Email ditambahkan
                     command.Parameters.AddWithValue("@Email", email);
+
+                    // Pastikan parameter @Password ditambahkan
                     command.Parameters.AddWithValue("@Password", password);
 
-                    object result = command.ExecuteScalar();
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            string hashedPassword = reader["Password"].ToString();
 
-                    return result != null; // Jika result tidak null, login berhasil
+                            // Verifikasi password dengan membandingkan hash
+                            return VerifyPassword(password, hashedPassword);
+                        }
+                    }
                 }
+            }
+
+            return false;
+        }
+
+        private bool VerifyPassword(string inputPassword, string hashedPassword)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(inputPassword));
+
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < hashedBytes.Length; i++)
+                {
+                    builder.Append(hashedBytes[i].ToString("x2"));
+                }
+
+                string inipassword = builder.ToString();
+                Console.WriteLine($"Hashed Password: {inipassword}");
+
+                // Bandingkan hash input password dengan hash yang ada di database
+                return string.Equals(builder.ToString(), hashedPassword, StringComparison.OrdinalIgnoreCase);
             }
         }
 

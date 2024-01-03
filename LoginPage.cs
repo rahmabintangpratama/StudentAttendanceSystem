@@ -98,9 +98,6 @@ namespace StudentAttendanceSystem
                     builder.Append(hashedBytes[i].ToString("x2"));
                 }
 
-                string inipassword = builder.ToString();
-                Console.WriteLine($"Hashed Password: {inipassword}");
-
                 // Bandingkan hash input password dengan hash yang ada di database
                 return string.Equals(builder.ToString(), hashedPassword, StringComparison.OrdinalIgnoreCase);
             }

@@ -54,7 +54,7 @@
             this.btnBack.Location = new System.Drawing.Point(836, 12);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(130, 49);
-            this.btnBack.TabIndex = 9;
+            this.btnBack.TabIndex = 10;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -209,7 +209,7 @@
             this.btnExport.Location = new System.Drawing.Point(585, 12);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(130, 49);
-            this.btnExport.TabIndex = 64;
+            this.btnExport.TabIndex = 9;
             this.btnExport.Text = "Export";
             this.btnExport.UseVisualStyleBackColor = false;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);

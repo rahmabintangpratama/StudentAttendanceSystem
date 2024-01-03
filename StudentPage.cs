@@ -15,17 +15,12 @@ namespace StudentAttendanceSystem
     {
         private Connect connect;
         public static LoginSession loginSession;
-        private AttendanceProcess attendanceProcess;
         public StudentPage()
         {
             InitializeComponent();
             this.FormClosing += new FormClosingEventHandler(StudentPage_FormClosing);
 
             connect = new Connect();
-            attendanceProcess = new AttendanceProcess();
-            ComboBoxStudentData();
-            ComboBoxEventData();
-            ComboBoxStatusData();
             refreshData();
         }
 
@@ -33,55 +28,6 @@ namespace StudentAttendanceSystem
         private void StudentPage_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
-        }
-
-        private void ComboBoxStudentData()
-        {
-            DataTable studentTable = GetStudent();
-
-            comboBoxStudent.DisplayMember = "Nama";
-            comboBoxStudent.ValueMember = "UserID";
-
-            comboBoxStudent.DataSource = studentTable;
-        }
-
-        private DataTable GetStudent()
-        {
-            long currentUserID = LoginPage.currentLoginSession.UserID;
-            string queryStudent = $"SELECT UserID, Nama FROM user WHERE Role = 3 AND UserID = '{currentUserID}'";
-            return connect.RetrieveData(queryStudent);
-        }
-
-        private void ComboBoxEventData()
-        {
-            DataTable eventTable = GetEvent();
-
-            comboBoxEvent.DisplayMember = "EventName";
-            comboBoxEvent.ValueMember = "EventID";
-
-            comboBoxEvent.DataSource = eventTable;
-        }
-
-        private DataTable GetEvent()
-        {
-            string queryEvent = "SELECT EventID, EventName FROM event";
-            return connect.RetrieveData(queryEvent);
-        }
-
-        private void ComboBoxStatusData()
-        {
-            DataTable statusTable = GetStatus();
-
-            comboBoxKehadiran.DisplayMember = "keterangan";
-            comboBoxKehadiran.ValueMember = "Kehadiran";
-
-            comboBoxKehadiran.DataSource = statusTable;
-        }
-
-        private DataTable GetStatus()
-        {
-            string queryStatus = "SELECT Kehadiran, keterangan FROM status";
-            return connect.RetrieveData(queryStatus);
         }
 
         private void refreshData()
@@ -109,108 +55,6 @@ namespace StudentAttendanceSystem
                 LoginPage loginPage = new LoginPage();
                 loginPage.Show();
                 this.Hide();
-            }
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            DataRowView selectedStudent = (DataRowView)comboBoxStudent.SelectedItem;
-            long UserID = Convert.ToInt64(selectedStudent["UserID"]);
-            DataRowView selectedEvent = (DataRowView)comboBoxEvent.SelectedItem;
-            int EventID = Convert.ToInt32(selectedEvent["EventID"]);
-            DataRowView selectedStatus = (DataRowView)comboBoxKehadiran.SelectedItem;
-            int Status = Convert.ToInt32(selectedStatus["Kehadiran"]);
-
-            if (AddAttendance(UserID, EventID, Status))
-            {
-                MessageBox.Show("Attendance succesfuly added.");
-            }
-            else
-            {
-                MessageBox.Show("Attendance failed to be added.");
-            }
-
-            refreshData();
-        }
-
-        private bool AddAttendance(long UserID, int EventID, int Status)
-        {
-            try
-            {
-                attendanceProcess.InputAttendance(UserID, EventID, Status);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-                return false;
-            }
-        }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            int PresensiID = Convert.ToInt32(textBoxPresensiID.Text);
-            DataRowView selectedStudent = (DataRowView)comboBoxStudent.SelectedItem;
-            long UserID = Convert.ToInt64(selectedStudent["UserID"]);
-            DataRowView selectedEvent = (DataRowView)comboBoxEvent.SelectedItem;
-            int EventID = Convert.ToInt32(selectedEvent["EventID"]);
-            DataRowView selectedStatus = (DataRowView)comboBoxKehadiran.SelectedItem;
-            int Status = Convert.ToInt32(selectedStatus["Kehadiran"]);
-
-            if (EditAttendance(PresensiID, UserID, EventID, Status))
-            {
-                MessageBox.Show("Attendance succesfuly edited.");
-            }
-            else
-            {
-                MessageBox.Show("Attendance failed to be edited.");
-            }
-
-            refreshData();
-        }
-
-        private bool EditAttendance(int PresensiID, long UserID, int EventID, int Status)
-        {
-            try
-            {
-                attendanceProcess.EditAttendance(PresensiID, UserID, EventID, Status);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-                return false;
-            }
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            int PresensiID = Convert.ToInt32(textBoxPresensiID.Text);
-
-            if (RemoveAttendance(PresensiID))
-            {
-                MessageBox.Show("Attendance succesfuly deleted.");
-                textBoxPresensiID.Clear();
-            }
-            else
-            {
-                MessageBox.Show("Attendance failed to be deleted.");
-            }
-
-            refreshData();
-        }
-
-        private bool RemoveAttendance(int PresensiID)
-        {
-            try
-            {
-                attendanceProcess.RemoveAttendance(PresensiID);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-                return false;
             }
         }
 

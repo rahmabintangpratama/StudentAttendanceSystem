@@ -26,7 +26,6 @@ namespace StudentAttendanceSystem
             refreshData();
         }
 
-        // Tambahkan event handler untuk FormClosing
         private void EventPage_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
@@ -60,13 +59,10 @@ namespace StudentAttendanceSystem
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-
-            // Tampilkan dialog konfirmasi sebelum menutup form
             DialogResult result = MessageBox.Show("Are you sure you want to close this page?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
-                // Jika pengguna mengklik Yes, kembali ke halaman login
                 LecturerPage lecturerPage = new LecturerPage();
                 lecturerPage.Show();
                 this.Hide();
@@ -88,7 +84,6 @@ namespace StudentAttendanceSystem
 
             if (AddEvent(Event, kodeMK, Ruang, selectedTanggal))
             {
-                MessageBox.Show("Event successfuly added.");
                 textBoxEvent.Clear();
                 textBoxRuang.Clear();
             }
@@ -116,6 +111,12 @@ namespace StudentAttendanceSystem
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(textBoxEventID.Text))
+            {
+                MessageBox.Show("Event ID cannot be empty for update.");
+                return;
+            }
+
             int EventID = Convert.ToInt32(textBoxEventID.Text);
             string Event = textBoxEvent.Text;
             DataRowView selectedMatKul = (DataRowView)comboBoxMatKulName.SelectedItem;
@@ -125,7 +126,6 @@ namespace StudentAttendanceSystem
 
             if (EditEvent(EventID, Event, kodeMK, Ruang, selectedTanggal))
             {
-                MessageBox.Show("Event successfuly edited.");
                 textBoxEventID.Clear();
                 textBoxEvent.Clear();
                 textBoxRuang.Clear();
@@ -155,10 +155,10 @@ namespace StudentAttendanceSystem
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int EventID = Convert.ToInt32(textBoxEventID.Text);
+            long DosenID = LoginPage.currentLoginSession.UserID; // Ambil ID Dosen dari sesi login
 
-            if (RemoveEvent(EventID))
+            if (RemoveEvent(EventID, DosenID))
             {
-                MessageBox.Show("Event successfuly deleted.");
                 textBoxEventID.Clear();
             }
             else
@@ -169,11 +169,11 @@ namespace StudentAttendanceSystem
             refreshData();
         }
 
-        private bool RemoveEvent(int EventID)
+        private bool RemoveEvent(int EventID, long DosenID)
         {
             try
             {
-                eventProcess.RemoveEvent(EventID);
+                eventProcess.RemoveEvent(EventID, DosenID);
                 return true;
             }
             catch (Exception ex)

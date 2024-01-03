@@ -43,7 +43,6 @@ namespace StudentAttendanceSystem
             return connect.RetrieveData(query);
         }
 
-        // Tambahkan event handler untuk FormClosing
         private void MataKuliahPage_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
@@ -51,12 +50,10 @@ namespace StudentAttendanceSystem
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            // Tampilkan dialog konfirmasi sebelum menutup form
             DialogResult result = MessageBox.Show("Are you sure you want to close this page?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
-                // Jika pengguna mengklik Yes, kembali ke halaman login
                 AdministratorPage adminPage = new AdministratorPage();
                 adminPage.Show();
                 this.Hide();
@@ -83,9 +80,14 @@ namespace StudentAttendanceSystem
             DataRowView selectedDosen = (DataRowView)comboBoxDosenPengampu.SelectedItem;
             string userID = Convert.ToString(selectedDosen["UserID"]);
 
+            if (string.IsNullOrWhiteSpace(MatKul) || string.IsNullOrWhiteSpace(MatKulName))
+            {
+                MessageBox.Show("\"Mata kuliah\" Name and Code must not be blank.");
+                return;
+            }
+
             if (AddMatKul(MatKul, MatKulName, userID))
             {
-                MessageBox.Show("\"Mata Kuliah\" successfuly added.");
                 textBoxMatKul.Clear();
                 textBoxMatKulName.Clear();
             }
@@ -132,15 +134,20 @@ namespace StudentAttendanceSystem
             DataRowView selectedDosen = (DataRowView)comboBoxDosenPengampu.SelectedItem;
             string userID = Convert.ToString(selectedDosen["UserID"]);
 
+            if (string.IsNullOrWhiteSpace(MatKul) || string.IsNullOrWhiteSpace(MatKulName))
+            {
+                MessageBox.Show("\"Mata kuliah\" Name must not be blank.");
+                return;
+            }
+
             if (UpdateMatKul(MatKul, MatKulName, userID))
             {
-                MessageBox.Show("\"Mata Kuliah\" successfuly edited.");
                 textBoxMatKul.Clear();
                 textBoxMatKulName.Clear();
             }
             else
             {
-                MessageBox.Show("\"Mata Kuliah\" Failed to be edited.");
+                MessageBox.Show("\"Mata Kuliah\" failed to be edited.");
             }
 
             refreshData();
@@ -166,7 +173,6 @@ namespace StudentAttendanceSystem
 
             if (RemoveMatKul(MatKul))
             {
-                MessageBox.Show("\"Mata Kuliah\" Successfuly Deleted.");
                 textBoxMatKul.Clear();
             }
             else

@@ -27,7 +27,6 @@ namespace StudentAttendanceSystem
             refreshData();
         }
 
-        // Tambahkan event handler untuk FormClosing
         private void UserPage_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
@@ -51,12 +50,10 @@ namespace StudentAttendanceSystem
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            // Tampilkan dialog konfirmasi sebelum menutup form
             DialogResult result = MessageBox.Show("Are you sure you want to close this page?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
-                // Jika pengguna mengklik Yes, kembali ke halaman login
                 AdministratorPage adminPage = new AdministratorPage();
                 adminPage.Show();
                 this.Hide();
@@ -87,7 +84,6 @@ namespace StudentAttendanceSystem
 
             if (AddUser(userID, nama, email, password, Role))
             {
-                MessageBox.Show("Account successfuly added.");
                 textBoxUserId.Clear();
                 textBoxName.Clear();
                 textBoxEmail.Clear();
@@ -131,7 +127,13 @@ namespace StudentAttendanceSystem
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            int UserID = Convert.ToInt32(textBoxUserId.Text);
+            if (string.IsNullOrWhiteSpace(textBoxUserId.Text))
+            {
+                MessageBox.Show("User ID cannot be empty.");
+                return;
+            }
+
+            long UserID = Convert.ToInt64(textBoxUserId.Text);
             string nama = textBoxName.Text;
             string email = textBoxEmail.Text;
             string password = textBoxPassword.Text;
@@ -140,7 +142,6 @@ namespace StudentAttendanceSystem
 
             if (UpdateUser(UserID, nama, email, password, Role))
             {
-                MessageBox.Show("Account successfuly edited.");
                 textBoxUserId.Clear();
                 textBoxName.Clear();
                 textBoxEmail.Clear();
@@ -154,7 +155,7 @@ namespace StudentAttendanceSystem
             refreshData();
         }
 
-        private bool UpdateUser(int UserID, string nama, string email, string password, int Role)
+        private bool UpdateUser(long UserID, string nama, string email, string password, int Role)
         {
             try
             {
@@ -170,24 +171,25 @@ namespace StudentAttendanceSystem
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int UserID = Convert.ToInt32(textBoxUserId.Text);
+            long UserID = Convert.ToInt64(textBoxUserId.Text);
 
-            if (DeleteUser(UserID))
-            {
-                textBoxUserId.Clear();
-                textBoxName.Clear();
-                textBoxEmail.Clear();
-                textBoxPassword.Clear();
-            }
-            else
-            {
-                MessageBox.Show("Account failed to be deleted.");
-            }
+                if (DeleteUser(UserID))
+                {
+                    textBoxUserId.Clear();
+                    textBoxName.Clear();
+                    textBoxEmail.Clear();
+                    textBoxPassword.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Account failed to be deleted.");
+
+                }
 
             refreshData();
         }
 
-        private bool DeleteUser(int UserID)
+        private bool DeleteUser(long UserID)
         {
             try
             {

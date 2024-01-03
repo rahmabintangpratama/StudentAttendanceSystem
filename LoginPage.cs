@@ -24,13 +24,11 @@ namespace StudentAttendanceSystem
             InitializeComponent(); 
             userProcess = new UserProcess();
 
-            // Menambahkan event handler ketika form ditutup
             this.FormClosing += LoginPage_FormClosing;
         }
 
         private void LoginPage_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Pastikan untuk menghentikan aplikasi jika form utama ditutup
             Application.Exit();
         }
 
@@ -59,15 +57,11 @@ namespace StudentAttendanceSystem
             {
                 connection.Open();
 
-                // Perbarui perintah SQL untuk menggunakan parameter dengan benar
                 string query = "SELECT Password, Role FROM user WHERE Email = @Email";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    // Pastikan parameter @Email ditambahkan
                     command.Parameters.AddWithValue("@Email", email);
-
-                    // Pastikan parameter @Password ditambahkan
                     command.Parameters.AddWithValue("@Password", password);
 
                     using (MySqlDataReader reader = command.ExecuteReader())
@@ -76,7 +70,6 @@ namespace StudentAttendanceSystem
                         {
                             string hashedPassword = reader["Password"].ToString();
 
-                            // Verifikasi password dengan membandingkan hash
                             return VerifyPassword(password, hashedPassword);
                         }
                     }
@@ -98,7 +91,6 @@ namespace StudentAttendanceSystem
                     builder.Append(hashedBytes[i].ToString("x2"));
                 }
 
-                // Bandingkan hash input password dengan hash yang ada di database
                 return string.Equals(builder.ToString(), hashedPassword, StringComparison.OrdinalIgnoreCase);
             }
         }
@@ -117,7 +109,7 @@ namespace StudentAttendanceSystem
 
                     object result = command.ExecuteScalar();
 
-                    return result != null ? Convert.ToInt32(result) : 0; // Mengembalikan nilai role atau 0 jika tidak ditemukan
+                    return result != null ? Convert.ToInt32(result) : 0;
                 }
             }
         }
@@ -126,7 +118,7 @@ namespace StudentAttendanceSystem
         {
             switch (Role)
             {
-                case 1: // Admin
+                case 1: // Administrator
                     AdministratorPage adminPage = new AdministratorPage();
                     adminPage.Show();
                     break;
@@ -146,7 +138,7 @@ namespace StudentAttendanceSystem
                     break;
             }
 
-            this.Hide(); // Sembunyikan form login setelah login berhasil
+            this.Hide();
         }
 
         private void textBoxPassword_TextChanged(object sender, EventArgs e)

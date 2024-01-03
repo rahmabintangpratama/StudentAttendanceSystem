@@ -30,7 +30,6 @@ namespace StudentAttendanceSystem
             refreshData();
         }
 
-        // Tambahkan event handler untuk FormClosing
         private void AttendanceForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
@@ -87,7 +86,17 @@ namespace StudentAttendanceSystem
 
         private void refreshData()
         {
-            string query = "SELECT p.PresensiID AS Attendance_ID, p.waktu AS Time, e.EventName AS Nama_Event, u.Nama AS Student, s.keterangan AS Status FROM presensi p JOIN event e ON (p.EventID = e.EventID) JOIN user u ON (p.UserID = u.UserID) JOIN status s ON (p.Kehadiran = s.Kehadiran) ORDER BY Time DESC, e.EventID DESC, Nama_Event ASC, Student ASC";
+            long currentUserID = LoginPage.currentLoginSession.UserID;
+
+            string query = $"SELECT p.PresensiID AS Attendance_ID, p.waktu AS Time, e.EventName AS Nama_Event, u.Nama AS Student, s.keterangan AS Status " +
+                           $"FROM presensi p " +
+                           $"JOIN event e ON (p.EventID = e.EventID) " +
+                           $"JOIN user u ON (p.UserID = u.UserID) " +
+                           $"JOIN status s ON (p.Kehadiran = s.Kehadiran) " +
+                           $"JOIN matakuliah mk ON (e.KodeMataKuliah = mk.KodeMataKuliah) " +
+                           $"WHERE mk.UserID = {currentUserID} " + 
+                           $"ORDER BY Time DESC, e.EventID DESC, Nama_Event ASC, Student ASC";
+
             DataTable attendanceData = connect.RetrieveData(query);
 
             dataGridViewAttendance.DataSource = attendanceData;
@@ -100,13 +109,10 @@ namespace StudentAttendanceSystem
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-
-            // Tampilkan dialog konfirmasi sebelum menutup form
             DialogResult result = MessageBox.Show("Are you sure you want to close this page?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
-                // Jika pengguna mengklik Yes, kembali ke halaman login
                 LecturerPage lecturerPage = new LecturerPage();
                 lecturerPage.Show();
                 this.Hide();
@@ -124,7 +130,6 @@ namespace StudentAttendanceSystem
 
             if (AddAttendance(UserID, EventID, Status))
             {
-                MessageBox.Show("Attendance succesfuly added.");
             }
             else
             {
@@ -160,7 +165,6 @@ namespace StudentAttendanceSystem
 
             if (EditAttendance(PresensiID, UserID, EventID, Status))
             {
-                MessageBox.Show("Attendance succesfuly edited.");
             }
             else
             {
@@ -190,7 +194,6 @@ namespace StudentAttendanceSystem
 
             if (RemoveAttendance(PresensiID))
             {
-                MessageBox.Show("Attendance succesfuly deleted.");
                 textBoxPresensiID.Clear();
             }
             else
@@ -205,7 +208,8 @@ namespace StudentAttendanceSystem
         {
             try
             {
-                attendanceProcess.RemoveAttendance(PresensiID);
+                long currentUserID = LoginPage.currentLoginSession.UserID;
+                attendanceProcess.RemoveAttendance(PresensiID, currentUserID);
                 return true;
             }
             catch (Exception ex)
@@ -224,39 +228,30 @@ namespace StudentAttendanceSystem
         {
             try
             {
-                // Dapatkan data dari DataGridView
                 DataTable dt = (DataTable)dataGridViewAttendance.DataSource;
 
-                // Buat objek SaveFileDialog
                 SaveFileDialog saveFileDialog = new SaveFileDialog
                 {
-                    // Set ekstensi default dan filter file untuk CSV
                     DefaultExt = "csv",
                     Filter = "CSV files (*.csv)|*.csv",
                     Title = "Save CSV File"
                 };
 
-                // Tampilkan dialog untuk memilih direktori dan nama file
                 DialogResult result = saveFileDialog.ShowDialog();
 
                 if (result == DialogResult.OK)
                 {
-                    // Dapatkan path file yang dipilih oleh pengguna
                     string filePath = saveFileDialog.FileName;
 
-                    // Buat string builder untuk menyimpan data CSV
                     StringBuilder csvContent = new StringBuilder();
 
-                    // Tambahkan header CSV
                     csvContent.AppendLine("Attendance_ID,Time,Nama_Event,Student,Status");
 
-                    // Tambahkan baris data ke CSV
                     foreach (DataRow row in dt.Rows)
                     {
                         csvContent.AppendLine($"{row["Attendance_ID"]},{row["Time"]},{row["Nama_Event"]},{row["Student"]},{row["Status"]}");
                     }
 
-                    // Tulis string CSV ke file
                     File.WriteAllText(filePath, csvContent.ToString());
 
                     MessageBox.Show($"Data has been exported to {filePath}", "Export Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

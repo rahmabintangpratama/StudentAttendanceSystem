@@ -19,7 +19,6 @@ namespace StudentAttendanceSystem
             this.FormClosing += new FormClosingEventHandler(LecturerPage_FormClosing);
         }
 
-        // Tambahkan event handler untuk FormClosing
         private void LecturerPage_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
@@ -27,12 +26,10 @@ namespace StudentAttendanceSystem
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            // Tampilkan dialog konfirmasi sebelum menutup form
             DialogResult result = MessageBox.Show("Are you sure you want to log out?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
-                // Jika pengguna mengklik Yes, kembali ke halaman login
                 LoginPage loginPage = new LoginPage();
                 loginPage.Show();
                 this.Hide();

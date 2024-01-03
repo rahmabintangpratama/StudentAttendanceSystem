@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 02, 2024 at 04:14 PM
+-- Generation Time: Jan 03, 2024 at 09:28 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -42,9 +42,9 @@ CREATE TABLE `event` (
 INSERT INTO `event` (`EventID`, `EventName`, `KodeMataKuliah`, `venue`, `Tanggal`) VALUES
 (1, 'PPDE Kontrak Kuliah', 'PPL425302', 'R. 104', '2024-01-03'),
 (2, 'DPRP Kuliah 1', 'PSC425403', 'R. 102', '2024-01-02'),
-(12, 'DPRP Praktikum 1', 'PSC425403', 'Lab. Sistem Cerdas', '2024-01-01'),
+(12, 'Munif', 'COBA', 'R. 103', '2024-01-03'),
 (15, 'PPPL Presentasi 1', 'PPL425304', 'Online', '2023-12-23'),
-(20, 'Nyoba', 'COBA', 'Bumi', '2024-01-02');
+(20, 'Nyoba II', 'COBA', 'R. 305', '2024-01-03');
 
 -- --------------------------------------------------------
 
@@ -92,7 +92,8 @@ INSERT INTO `presensi` (`PresensiID`, `UserID`, `EventID`, `Kehadiran`, `waktu`)
 (3, 21106050006, 1, 2, '2024-01-02 11:39:42'),
 (4, 21106050001, 2, 3, '2024-01-01 23:41:54'),
 (5, 21106050006, 12, 1, '2024-01-01 23:22:23'),
-(7, 21106050001, 15, 1, '2024-01-01 23:42:27');
+(7, 21106050001, 15, 1, '2024-01-01 23:42:27'),
+(12, 21106050006, 20, 1, '2024-01-03 10:10:47');
 
 -- --------------------------------------------------------
 
@@ -154,16 +155,17 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`UserID`, `Role`, `Email`, `Password`, `Nama`) VALUES
-(123, 2, 'dosen@dosen.com', 'dosen', 'Dosen'),
-(1234, 2, 'anjay@anjay.com', 'anjay', 'anjay'),
-(30112023, 1, 'admin@admin.com', 'admin', 'admin'),
-(21106050001, 3, '21106050001@student.uin-suka.ac.id', '21106050001', 'Hikmah Nursidik'),
-(21106050006, 3, '21106050006@student.uin-suka.ac.id', '21106050006', 'Rahma Bintang Pratama'),
-(21106050046, 3, '21106050046@student.uin-suka.ac.id', '21106050046', 'Muhammad Hafiz'),
-(21106050047, 3, '21106050047@student.uin-suka.ac.id', '21106050047', 'Ibnu Raju Humam'),
-(197701032005011003, 2, 'agung.fatwanto@uin-suka.ac.id', '197701032005011003', 'Dr. Agung Fatwanto, S.Si., M.Kom.'),
-(197801062002122001, 2, 'maria.siregar@uin-suka.ac.id', '197801062002122001', 'Ir. Maria Ulfah Siregar, S.Kom., MIT., Ph.D.'),
-(198603062011011009, 2, 'aulia.faqih@uin-suka.ac.id', '198603062011011009', 'Ir. Aulia Faqih Rifa\'i, M.Kom.');
+(123, 2, 'dosen@dosen.com', '10bd0c68fcf7c923c781e2e5fbd8cc052b126949eda28de48de758ad58f084cf', 'dosen'),
+(1234, 2, 'anjay@anjay.com', '7306601c15e2d0586a1b022a3acde820647ad509127e058123034660686ae164', 'anjay'),
+(12345, 1, 'bintang@bintang.com', '15964f639ea2c22614ee4f19aed1ad4461cf65672c9de7158b8b62210d83aeb9', 'bintang'),
+(30112023, 1, 'admin@admin.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'admin'),
+(21106050001, 3, '21106050001@student.uin-suka.ac.id', '3be9a2f1ad2736a9d6380d56440d3ce3ac30d6ce31804ffd85f341c7f7abf145', 'Hikmah Nursidik'),
+(21106050006, 3, '21106050006@student.uin-suka.ac.id', '12c3685f48007d522c86eb60f33a7884924583c670a52b0f1ed519d37630a0ab', 'Rahma Bintang Pratama'),
+(21106050046, 3, '21106050046@student.uin-suka.ac.id', 'e3d994381e10b96c7bee44fa7cbae37ac8df0cd8cebdc3ade73b8797ed5e7473', 'Muhammad Hafiz'),
+(21106050047, 3, '21106050047@student.uin-suka.ac.id', '7e57da2cce93809ed9587aefa3eee84cfe40994918eb23e32a967a2e14009489', 'Ibnu Raju Humam'),
+(197701032005011003, 2, 'agung.fatwanto@uin-suka.ac.id', '77444d0dd54f1c088a902282255ddf8472c8f5385540262547814efe7ffb384c', 'Dr. Agung Fatwanto, S.Si., M.Kom.'),
+(197801062002122001, 2, 'maria.siregar@uin-suka.ac.id', '87ecb5bd6ea5d929a0ef9e109260222812cbf0e8946bd0868b54bf6a02cf38bf', 'Ir. Maria Ulfah Siregar, S.Kom., MIT., Ph.D.'),
+(198603062011011009, 2, 'aulia.faqih@uin-suka.ac.id', 'bf203326bb2da40daa3f4f1bdeb0a144667d88f576d550a63f0a1e450aa885dd', 'Ir. Aulia Faqih Rifa\'i, M.Kom.');
 
 --
 -- Indexes for dumped tables
@@ -219,13 +221,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `EventID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `EventID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `presensi`
 --
 ALTER TABLE `presensi`
-  MODIFY `PresensiID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `PresensiID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables

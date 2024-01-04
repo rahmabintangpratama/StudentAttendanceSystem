@@ -23,6 +23,7 @@ namespace StudentAttendanceSystem
 
             connect = new Connect();
             userProcess = new UserProcess();
+            textBoxUserId.KeyPress += new KeyPressEventHandler(textBoxUserID_KeyPress);
             ComboBoxRoleData();
             refreshData();
         }
@@ -30,6 +31,15 @@ namespace StudentAttendanceSystem
         private void UserPage_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void textBoxUserID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Hanya izinkan input angka dan kontrol khusus (seperti Backspace)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
         private void ComboBoxRoleData()
@@ -75,6 +85,12 @@ namespace StudentAttendanceSystem
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(textBoxUserId.Text))
+            {
+                MessageBox.Show("User ID cannot be empty.");
+                return;
+            }
+
             string userID = textBoxUserId.Text;
             string nama = textBoxName.Text;
             string email = textBoxEmail.Text;
@@ -140,19 +156,36 @@ namespace StudentAttendanceSystem
             DataRowView selectedRole = (DataRowView)comboBoxRole.SelectedItem;
             int Role = Convert.ToInt32(selectedRole["Role"]);
 
-            if (UpdateUser(UserID, nama, email, password, Role))
+            // Check if the user exists in the database before updating
+            if (IsUserExists(UserID))
             {
-                textBoxUserId.Clear();
-                textBoxName.Clear();
-                textBoxEmail.Clear();
-                textBoxPassword.Clear();
+                if (UpdateUser(UserID, nama, email, password, Role))
+                {
+                    textBoxUserId.Clear();
+                    textBoxName.Clear();
+                    textBoxEmail.Clear();
+                    textBoxPassword.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Account failed to be edited.");
+                }
             }
             else
             {
-                MessageBox.Show("Account Failed to be edited.");
+                MessageBox.Show("User not found in the database.");
             }
 
             refreshData();
+        }
+
+        private bool IsUserExists(long UserID)
+        {
+            // Implement logic to check whether UserID exists in the database
+            string query = $"SELECT COUNT(*) FROM user WHERE UserID = {UserID}";
+            int count = Convert.ToInt32(connect.ExecuteScalar(query));
+
+            return count > 0;
         }
 
         private bool UpdateUser(long UserID, string nama, string email, string password, int Role)
@@ -173,6 +206,8 @@ namespace StudentAttendanceSystem
         {
             long UserID = Convert.ToInt64(textBoxUserId.Text);
 
+            if (IsUserExists(UserID))
+            {
                 if (DeleteUser(UserID))
                 {
                     textBoxUserId.Clear();
@@ -185,6 +220,11 @@ namespace StudentAttendanceSystem
                     MessageBox.Show("Account failed to be deleted.");
 
                 }
+            }
+            else
+            {
+                MessageBox.Show("User not found in the database.");
+            }
 
             refreshData();
         }

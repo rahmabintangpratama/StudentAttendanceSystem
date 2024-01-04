@@ -23,6 +23,7 @@ namespace StudentAttendanceSystem
 
             connect = new Connect();
             attendanceProcess = new AttendanceProcess();
+            textBoxPresensiID.KeyPress += new KeyPressEventHandler(textBoxPresensiID_KeyPress);
             ComboBoxStudentData();
             ComboBoxEventData();
             ComboBoxStatusData();
@@ -32,6 +33,15 @@ namespace StudentAttendanceSystem
         private void AttendancePage_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void textBoxPresensiID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Hanya izinkan input angka dan kontrol khusus (seperti Backspace)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
         private void ComboBoxStudentData()
@@ -146,7 +156,21 @@ namespace StudentAttendanceSystem
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(textBoxPresensiID.Text))
+            {
+                MessageBox.Show("Presensi ID cannot be empty for update.");
+                return;
+            }
+
             int PresensiID = Convert.ToInt32(textBoxPresensiID.Text);
+
+            // Memeriksa apakah data presensi dengan PresensiID tertentu ada di database
+            if (!IsPresensiIDExists(PresensiID))
+            {
+                MessageBox.Show("Attendance data not found in the database.");
+                return;
+            }
+
             DataRowView selectedStudent = (DataRowView)comboBoxStudent.SelectedItem;
             long UserID = Convert.ToInt64(selectedStudent["UserID"]);
             DataRowView selectedEvent = (DataRowView)comboBoxEvent.SelectedItem;
@@ -156,6 +180,7 @@ namespace StudentAttendanceSystem
 
             if (EditAttendance(PresensiID, UserID, EventID, Status))
             {
+                textBoxPresensiID.Clear();
             }
             else
             {
@@ -163,6 +188,15 @@ namespace StudentAttendanceSystem
             }
 
             refreshData();
+        }
+
+        private bool IsPresensiIDExists(int PresensiID)
+        {
+            // Pengecekan apakah PresensiID ada di database
+            string query = $"SELECT COUNT(*) FROM presensi WHERE PresensiID = {PresensiID}";
+            int count = Convert.ToInt32(connect.ExecuteScalar(query));
+
+            return count > 0;
         }
 
         private bool EditAttendance(int PresensiID, long UserID, int EventID, int Status)
@@ -183,13 +217,21 @@ namespace StudentAttendanceSystem
         {
             int PresensiID = Convert.ToInt32(textBoxPresensiID.Text);
 
-            if (RemoveAttendance(PresensiID))
+            if (IsPresensiIDExists(PresensiID))
             {
-                textBoxPresensiID.Clear();
+                if (RemoveAttendance(PresensiID))
+                {
+                    textBoxPresensiID.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Attendance failed to be deleted.");
+                }
             }
             else
             {
-                MessageBox.Show("Attendance failed to be deleted.");
+                MessageBox.Show("Attendance data not found in the database.");
+                return;
             }
 
             refreshData();
@@ -212,15 +254,23 @@ namespace StudentAttendanceSystem
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            ExportToCSV();
+            DataTable dt = (DataTable)dataGridViewAttendance.DataSource;
+
+            // Periksa apakah ada data presensi sebelum memulai proses ekspor
+            if (dt.Rows.Count > 0)
+            {
+                ExportToCSV(dt);
+            }
+            else
+            {
+                MessageBox.Show("No attendance data available for export.", "Export Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
-        private void ExportToCSV()
+        private void ExportToCSV(DataTable dt)
         {
             try
             {
-                DataTable dt = (DataTable)dataGridViewAttendance.DataSource;
-
                 SaveFileDialog saveFileDialog = new SaveFileDialog
                 {
                     DefaultExt = "csv",

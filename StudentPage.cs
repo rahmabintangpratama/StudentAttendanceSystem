@@ -57,15 +57,23 @@ namespace StudentAttendanceSystem
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            ExportToCSV();
+            DataTable dt = (DataTable)dataGridViewAttendance.DataSource;
+
+            // Periksa apakah ada data presensi sebelum memulai proses ekspor
+            if (dt.Rows.Count > 0)
+            {
+                ExportToCSV(dt);
+            }
+            else
+            {
+                MessageBox.Show("No attendance data available for export.", "Export Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
-        private void ExportToCSV()
+        private void ExportToCSV(DataTable dt)
         {
             try
             {
-                DataTable dt = (DataTable)dataGridViewAttendance.DataSource;
-
                 SaveFileDialog saveFileDialog = new SaveFileDialog
                 {
                     DefaultExt = "csv",

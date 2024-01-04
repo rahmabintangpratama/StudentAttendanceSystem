@@ -62,16 +62,26 @@ namespace StudentAttendanceSystem
             {
                 if (!string.IsNullOrWhiteSpace(Event))
                 {
-                    if (CheckEventAvailabilityOnUpdate(EventID, Event))
+                    int currentUserRole = GetUserRole(LoginPage.currentLoginSession.Email);
+                    long DosenID = LoginPage.currentLoginSession.UserID;
+
+                    if (currentUserRole == 1 || IsDosenInMataKuliah(DosenID, EventID))
                     {
-                        string dateFormat = selectedTanggal.ToString("yyyy-MM-dd");
-                        string query = $"UPDATE event SET EventName = '{Event}', KodeMataKuliah = '{kodeMK}', venue = '{Ruang}', Tanggal = '{dateFormat}' WHERE EventID = '{EventID}'";
-                        connect.RunCommand(query);
-                        MessageBox.Show("Event successfully edited.");
+                        if (CheckEventAvailabilityOnUpdate(EventID, Event))
+                        {
+                            string dateFormat = selectedTanggal.ToString("yyyy-MM-dd");
+                            string query = $"UPDATE event SET EventName = '{Event}', KodeMataKuliah = '{kodeMK}', venue = '{Ruang}', Tanggal = '{dateFormat}' WHERE EventID = '{EventID}'";
+                            connect.RunCommand(query);
+                            MessageBox.Show("Event successfully edited.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("\"Event\" Name is already in use. Please use a different Name.");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("\"Event\" Name is already in use. Please use a different Name.");
+                        MessageBox.Show("You are not authorized to edit this event.");
                     }
                 }
                 else

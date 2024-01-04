@@ -136,21 +136,38 @@ namespace StudentAttendanceSystem
 
             if (string.IsNullOrWhiteSpace(MatKul) || string.IsNullOrWhiteSpace(MatKulName))
             {
-                MessageBox.Show("\"Mata kuliah\" Name must not be blank.");
+                MessageBox.Show("\"Mata kuliah\" Code and Name must not be blank.");
                 return;
             }
 
-            if (UpdateMatKul(MatKul, MatKulName, userID))
+            // Check if the mata kuliah exists in the database before updating
+            if (IsMatKulExists(MatKul))
             {
-                textBoxMatKul.Clear();
-                textBoxMatKulName.Clear();
+                if (UpdateMatKul(MatKul, MatKulName, userID))
+                {
+                    textBoxMatKul.Clear();
+                    textBoxMatKulName.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("\"Mata Kuliah\" failed to be edited.");
+                }
             }
             else
             {
-                MessageBox.Show("\"Mata Kuliah\" failed to be edited.");
+                MessageBox.Show("\"Mata Kuliah\" not found in the database.");
             }
 
             refreshData();
+        }
+
+        private bool IsMatKulExists(string MatKul)
+        {
+            // Implement logic to check whether MatKul exists in the database
+            string query = $"SELECT COUNT(*) FROM matakuliah WHERE KodeMataKuliah = '{MatKul}'";
+            int count = Convert.ToInt32(connect.ExecuteScalar(query));
+
+            return count > 0;
         }
 
         private bool UpdateMatKul(string MatKul, string MatKulName, string UserID)
@@ -171,13 +188,20 @@ namespace StudentAttendanceSystem
         {
             string MatKul = textBoxMatKul.Text;
 
-            if (RemoveMatKul(MatKul))
+            if (IsMatKulExists(MatKul))
             {
-                textBoxMatKul.Clear();
+                if (RemoveMatKul(MatKul))
+                {
+                    textBoxMatKul.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("\"Mata Kuliah\" failed to be deleted.");
+                }
             }
             else
             {
-                MessageBox.Show("\"Mata Kuliah\" failed to be deleted.");
+                MessageBox.Show("\"Mata Kuliah\" not found in the database.");
             }
 
             refreshData();

@@ -51,7 +51,7 @@ namespace StudentAttendanceSystem
                     long DosenID = LoginPage.currentLoginSession.UserID;
 
                     // Memeriksa apakah pengguna adalah admin atau dosen yang mengampu mata kuliah pada event terkait
-                    if (currentUserRole == 1 || IsDosenInMataKuliah(DosenID, EventID))
+                    if (currentUserRole == 1 || (IsEventInDosenMataKuliah(PresensiID, DosenID)))
                     {
                         string currentTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                         string query = $"UPDATE presensi SET UserID = '{UserID}', EventID = '{EventID}', Kehadiran = '{Status}', waktu = '{currentTime}' WHERE PresensiID = '{PresensiID}'";
@@ -74,17 +74,6 @@ namespace StudentAttendanceSystem
             }
         }
 
-        private bool IsDosenInMataKuliah(long DosenID, int EventID)
-        {
-            // Memeriksa apakah dosen mengampu mata kuliah pada event terkait
-            string query = $"SELECT mk.UserID FROM matakuliah mk " +
-                           $"INNER JOIN event e ON mk.KodeMataKuliah = e.KodeMataKuliah " +
-                           $"WHERE e.EventID = '{EventID}' AND mk.UserID = '{DosenID}'";
-
-            DataTable result = connect.RetrieveData(query);
-            return result.Rows.Count > 0;
-        }
-
         private bool IsAttendanceExists(long UserID, int EventID, int excludePresensiID = -1)
         {
             // Memeriksa apakah sudah ada presensi untuk student dan event tertentu (dengan mengabaikan presensi tertentu jika sedang dilakukan edit)
@@ -104,7 +93,8 @@ namespace StudentAttendanceSystem
             try
             {
                 int currentUserRole = GetUserRole(LoginPage.currentLoginSession.Email);
-                if (currentUserRole == 1)
+
+                if (currentUserRole == 1 || IsEventInDosenMataKuliah(PresensiID, UserID))
                 {
                     string query = $"DELETE FROM presensi WHERE PresensiID = '{PresensiID}'";
                     connect.RunCommand(query);
@@ -112,22 +102,13 @@ namespace StudentAttendanceSystem
                 }
                 else
                 {
-                    // Memeriksa apakah event yang terkait dengan presensi memiliki mata kuliah yang diampu oleh dosen
-                    if (IsEventInDosenMataKuliah(PresensiID, UserID))
-                    {
-                        string query = $"DELETE FROM presensi WHERE PresensiID = '{PresensiID}'";
-                        connect.RunCommand(query);
-                        MessageBox.Show("Attendance successfully deleted.");
-                    }
-                    else
-                    {
-                        MessageBox.Show("You are not authorized to delete attendance for this event.");
-                    }
+                    MessageBox.Show("You are not authorized to delete attendance for this event.");
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error: " + ex.Message);
+                MessageBox.Show("Failed to delete attendance.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

@@ -22,6 +22,7 @@ namespace StudentAttendanceSystem
 
             connect = new Connect();
             eventProcess = new EventProcess();
+            textBoxEventID.KeyPress += new KeyPressEventHandler(textBoxEventID_KeyPress);
             ComboBoxMatKulNameData();
             refreshData();
         }
@@ -29,6 +30,15 @@ namespace StudentAttendanceSystem
         private void EventPage_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void textBoxEventID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Hanya izinkan input angka dan kontrol khusus (seperti Backspace)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
         private void ComboBoxMatKulNameData()
@@ -135,8 +145,17 @@ namespace StudentAttendanceSystem
         {
             try
             {
-                eventProcess.UpdateEvent(EventID, Event, kodeMK, Ruang, selectedTanggal);
-                return true;
+                // Periksa apakah event dengan EventID tertentu ada di database
+                if (IsEventExists(EventID))
+                {
+                    eventProcess.UpdateEvent(EventID, Event, kodeMK, Ruang, selectedTanggal);
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Event does not exist in the database. Unable to update.");
+                    return false;
+                }
             }
             catch (Exception ex)
             {
@@ -145,21 +164,43 @@ namespace StudentAttendanceSystem
             }
         }
 
+        private bool IsEventExists(int EventID)
+        {
+            // Lakukan pengecekan apakah EventID ada di database
+            string query = $"SELECT COUNT(*) FROM event WHERE EventID = {EventID}";
+            int count = Convert.ToInt32(connect.ExecuteScalar(query));
+
+            return count > 0;
+        }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(textBoxEventID.Text))
+            {
+                MessageBox.Show("Event ID cannot be empty for delete.");
+                return;
+            }
+
             int EventID = Convert.ToInt32(textBoxEventID.Text);
             long DosenID = LoginPage.currentLoginSession.UserID;
 
-            if (RemoveEvent(EventID, DosenID))
+            if (IsEventExists(EventID))
             {
-                textBoxEventID.Clear();
+                if (RemoveEvent(EventID, DosenID))
+                {
+                    textBoxEventID.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Event failed to be deleted.");
+                }
             }
             else
             {
-                MessageBox.Show("Event failed to be deleted.");
+                MessageBox.Show("Event does not exist in the database. Unable to update.");
             }
 
-            refreshData();
+        refreshData();
         }
 
         private bool RemoveEvent(int EventID, long DosenID)

@@ -78,6 +78,31 @@ namespace StudentAttendanceSystem
             }
         }
 
+        public object ExecuteScalar(string query)
+        {
+            object result = null;
+
+            try
+            {
+                if (connection.State == ConnectionState.Closed)
+                    connection.Open();
+
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                result = cmd.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                    connection.Close();
+            }
+
+            return result;
+        }
+
         public void Dispose()
         {
             if (connection != null)

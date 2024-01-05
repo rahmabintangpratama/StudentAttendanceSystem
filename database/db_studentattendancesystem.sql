@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 03, 2024 at 09:28 AM
+-- Generation Time: Jan 05, 2024 at 09:29 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -112,8 +112,8 @@ CREATE TABLE `role_value` (
 
 INSERT INTO `role_value` (`Role`, `job`) VALUES
 (1, 'Administrator'),
-(2, 'Dosen'),
-(3, 'Mahasiswa');
+(2, 'Lecturer'),
+(3, 'Student');
 
 -- --------------------------------------------------------
 
@@ -131,10 +131,10 @@ CREATE TABLE `status` (
 --
 
 INSERT INTO `status` (`Kehadiran`, `keterangan`) VALUES
-(1, 'Hadir'),
-(2, 'Izin'),
-(3, 'Sakit'),
-(4, 'Absen');
+(1, 'Present'),
+(2, 'Permission'),
+(3, 'Medical Leave'),
+(4, 'Absent');
 
 -- --------------------------------------------------------
 

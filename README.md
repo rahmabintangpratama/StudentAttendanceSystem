@@ -4,7 +4,7 @@ Student Attendance System is a desktop-based application built using the C# prog
 
 ## Important
 **Note:**  
-This application has been developed with the assumption that all __"Mahasiswa"__ enroll in all __"Mata Kuliah"__.
+This application has been developed with the assumption that all __"Student"__ enroll in all __"Course"__.
 
 ## Login (Administrator)
 **Email:**  

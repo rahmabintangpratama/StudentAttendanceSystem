@@ -60,7 +60,7 @@ namespace StudentAttendanceSystem
                     }
                     else
                     {
-                        MessageBox.Show("You are not authorized to edit attendance for this event.");
+                        MessageBox.Show("Attendance ID does not found.");
                     }
                 }
                 else
@@ -102,7 +102,7 @@ namespace StudentAttendanceSystem
                 }
                 else
                 {
-                    MessageBox.Show("You are not authorized to delete attendance for this event.");
+                    MessageBox.Show("Attendance ID does not found.");
                 }
             }
             catch (Exception ex)

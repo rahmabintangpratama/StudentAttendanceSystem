@@ -67,7 +67,7 @@ namespace StudentAttendanceSystem
 
         private void refreshData()
         {
-            string query = "SELECT m.KodeMataKuliah AS Kode_Mata_Kuliah, m.NamaMataKuliah AS Mata_Kuliah, u.Nama AS Dosen_Pengampu FROM matakuliah m JOIN user u ON (m.UserID = u.UserID) ORDER BY Kode_Mata_Kuliah ASC";
+            string query = "SELECT m.KodeMataKuliah AS Course_ID, m.NamaMataKuliah AS Course, u.Nama AS Lecturer FROM matakuliah m JOIN user u ON (m.UserID = u.UserID) ORDER BY Course_ID ASC";
             DataTable matkulData = connect.RetrieveData(query);
 
             dataGridViewMatKul.DataSource = matkulData;
@@ -82,7 +82,7 @@ namespace StudentAttendanceSystem
 
             if (string.IsNullOrWhiteSpace(MatKul) || string.IsNullOrWhiteSpace(MatKulName))
             {
-                MessageBox.Show("\"Mata kuliah\" Name and Code must not be blank.");
+                MessageBox.Show("Course ID and Name must not be blank.");
                 return;
             }
 
@@ -93,7 +93,7 @@ namespace StudentAttendanceSystem
             }
             else
             {
-                MessageBox.Show("\"Mata Kuliah\" failed to be added.");
+                MessageBox.Show("Course failed to be added.");
             }
 
             refreshData();
@@ -110,7 +110,7 @@ namespace StudentAttendanceSystem
                 }
                 else
                 {
-                    MessageBox.Show("\"Kode Mata Kuliah\" already exist..");
+                    MessageBox.Show("Course ID already exist.");
                     return false;
                 }
             }
@@ -136,7 +136,7 @@ namespace StudentAttendanceSystem
 
             if (string.IsNullOrWhiteSpace(MatKul) || string.IsNullOrWhiteSpace(MatKulName))
             {
-                MessageBox.Show("\"Mata kuliah\" Code and Name must not be blank.");
+                MessageBox.Show("Course ID and Name must not be blank.");
                 return;
             }
 
@@ -150,12 +150,12 @@ namespace StudentAttendanceSystem
                 }
                 else
                 {
-                    MessageBox.Show("\"Mata Kuliah\" failed to be edited.");
+                    MessageBox.Show("Course failed to be edited.");
                 }
             }
             else
             {
-                MessageBox.Show("\"Mata Kuliah\" not found in the database.");
+                MessageBox.Show("Course does not found.");
             }
 
             refreshData();
@@ -196,12 +196,12 @@ namespace StudentAttendanceSystem
                 }
                 else
                 {
-                    MessageBox.Show("\"Mata Kuliah\" failed to be deleted.");
+                    MessageBox.Show("Course failed to be deleted.");
                 }
             }
             else
             {
-                MessageBox.Show("\"Mata Kuliah\" not found in the database.");
+                MessageBox.Show("Course does not found.");
             }
 
             refreshData();

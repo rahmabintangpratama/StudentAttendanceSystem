@@ -40,11 +40,11 @@
             this.btnPresensi.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.btnPresensi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPresensi.ForeColor = System.Drawing.Color.White;
-            this.btnPresensi.Location = new System.Drawing.Point(12, 110);
+            this.btnPresensi.Location = new System.Drawing.Point(198, 110);
             this.btnPresensi.Name = "btnPresensi";
-            this.btnPresensi.Size = new System.Drawing.Size(130, 49);
-            this.btnPresensi.TabIndex = 3;
-            this.btnPresensi.Text = "Presensi";
+            this.btnPresensi.Size = new System.Drawing.Size(182, 49);
+            this.btnPresensi.TabIndex = 4;
+            this.btnPresensi.Text = "Attendance";
             this.btnPresensi.UseVisualStyleBackColor = false;
             this.btnPresensi.Click += new System.EventHandler(this.btnPresensi_Click);
             // 
@@ -53,11 +53,11 @@
             this.btnMatkul.BackColor = System.Drawing.Color.Sienna;
             this.btnMatkul.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMatkul.ForeColor = System.Drawing.Color.White;
-            this.btnMatkul.Location = new System.Drawing.Point(198, 29);
+            this.btnMatkul.Location = new System.Drawing.Point(12, 110);
             this.btnMatkul.Name = "btnMatkul";
-            this.btnMatkul.Size = new System.Drawing.Size(182, 49);
+            this.btnMatkul.Size = new System.Drawing.Size(130, 49);
             this.btnMatkul.TabIndex = 2;
-            this.btnMatkul.Text = "Mata Kuliah";
+            this.btnMatkul.Text = "Course";
             this.btnMatkul.UseVisualStyleBackColor = false;
             this.btnMatkul.Click += new System.EventHandler(this.btnMatkul_Click);
             // 
@@ -92,10 +92,10 @@
             this.btnEvent.BackColor = System.Drawing.Color.DarkOrange;
             this.btnEvent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEvent.ForeColor = System.Drawing.Color.White;
-            this.btnEvent.Location = new System.Drawing.Point(198, 110);
+            this.btnEvent.Location = new System.Drawing.Point(198, 29);
             this.btnEvent.Name = "btnEvent";
             this.btnEvent.Size = new System.Drawing.Size(182, 49);
-            this.btnEvent.TabIndex = 4;
+            this.btnEvent.TabIndex = 3;
             this.btnEvent.Text = "Event";
             this.btnEvent.UseVisualStyleBackColor = false;
             this.btnEvent.Click += new System.EventHandler(this.btnEvent_Click);
@@ -104,6 +104,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(578, 185);
             this.Controls.Add(this.btnEvent);
             this.Controls.Add(this.btnLogOut);

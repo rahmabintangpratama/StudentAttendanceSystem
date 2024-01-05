@@ -94,7 +94,7 @@ namespace StudentAttendanceSystem
 
         private void refreshData()
         {
-            string query = "SELECT p.PresensiID AS Attendance_ID, p.waktu AS Time, e.EventName AS Nama_Event, u.Nama AS Student, s.keterangan AS Status FROM presensi p JOIN event e ON (p.EventID = e.EventID) JOIN user u ON (p.UserID = u.UserID) JOIN status s ON (p.Kehadiran = s.Kehadiran) ORDER BY Time DESC, e.EventID DESC, Nama_Event ASC, Student ASC";
+            string query = "SELECT p.PresensiID AS Attendance_ID, p.waktu AS Time, e.EventName AS Event_Name, u.Nama AS Student, s.keterangan AS Status FROM presensi p JOIN event e ON (p.EventID = e.EventID) JOIN user u ON (p.UserID = u.UserID) JOIN status s ON (p.Kehadiran = s.Kehadiran) ORDER BY Time DESC, e.EventID DESC, Event_Name ASC, Student ASC";
             DataTable attendanceData = connect.RetrieveData(query);
 
             dataGridViewAttendance.DataSource = attendanceData;
@@ -158,7 +158,7 @@ namespace StudentAttendanceSystem
         {
             if (string.IsNullOrWhiteSpace(textBoxPresensiID.Text))
             {
-                MessageBox.Show("Presensi ID cannot be empty for update.");
+                MessageBox.Show("Attendance ID cannot be empty for update.");
                 return;
             }
 
@@ -167,7 +167,7 @@ namespace StudentAttendanceSystem
             // Memeriksa apakah data presensi dengan PresensiID tertentu ada di database
             if (!IsPresensiIDExists(PresensiID))
             {
-                MessageBox.Show("Attendance data not found in the database.");
+                MessageBox.Show("Attendance ID does not found.");
                 return;
             }
 
@@ -230,7 +230,7 @@ namespace StudentAttendanceSystem
             }
             else
             {
-                MessageBox.Show("Attendance data not found in the database.");
+                MessageBox.Show("Attendance ID does not found.");
                 return;
             }
 
@@ -286,11 +286,11 @@ namespace StudentAttendanceSystem
 
                     StringBuilder csvContent = new StringBuilder();
 
-                    csvContent.AppendLine("Attendance_ID,Time,Nama_Event,Student,Status");
+                    csvContent.AppendLine("Attendance_ID,Time,Event_Name,Student,Status");
 
                     foreach (DataRow row in dt.Rows)
                     {
-                        csvContent.AppendLine($"{row["Attendance_ID"]},{row["Time"]},{row["Nama_Event"]},{row["Student"]},{row["Status"]}");
+                        csvContent.AppendLine($"{row["Attendance_ID"]},{row["Time"]},{row["Event_Name"]},{row["Student"]},{row["Status"]}");
                     }
 
                     File.WriteAllText(filePath, csvContent.ToString());

@@ -33,12 +33,12 @@ namespace StudentAttendanceSystem
                     }
                     else
                     {
-                        MessageBox.Show("\"Event\" Name is already in use. Please use a different Name.");
+                        MessageBox.Show("Event Name is already in use. Please use a different Name.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("\"Event\" Name cannot be empty.");
+                    MessageBox.Show("Event Name cannot be empty.");
                 }
             }
             catch (Exception ex)
@@ -76,17 +76,17 @@ namespace StudentAttendanceSystem
                         }
                         else
                         {
-                            MessageBox.Show("\"Event\" Name is already in use. Please use a different Name.");
+                            MessageBox.Show("Event Name is already in use. Please use a different Name.");
                         }
                     }
                     else
                     {
-                        MessageBox.Show("You are not authorized to edit this event.");
+                        MessageBox.Show("Event ID does not found.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("\"Event\" Name cannot be empty.");
+                    MessageBox.Show("Event Name cannot be empty.");
                 }
             }
             catch (Exception ex)
@@ -122,13 +122,13 @@ namespace StudentAttendanceSystem
                     }
                     else
                     {
-                        MessageBox.Show("Event cannot be deleted as it is still connected to \"Presensi\" data.");
+                        MessageBox.Show("Event cannot be deleted as it is still connected to Attendance data.");
                         return false;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("You are not authorized to delete this event.");
+                    MessageBox.Show("Event ID does not found.");
                     return false;
                 }
             }

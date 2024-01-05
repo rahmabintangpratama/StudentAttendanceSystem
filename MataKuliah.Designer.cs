@@ -70,9 +70,9 @@
             this.lblMatKul.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMatKul.Location = new System.Drawing.Point(7, 22);
             this.lblMatKul.Name = "lblMatKul";
-            this.lblMatKul.Size = new System.Drawing.Size(163, 29);
+            this.lblMatKul.Size = new System.Drawing.Size(132, 29);
             this.lblMatKul.TabIndex = 48;
-            this.lblMatKul.Text = "Kode MatKul :";
+            this.lblMatKul.Text = "Course ID :";
             // 
             // dataGridViewMatKul
             // 
@@ -144,9 +144,9 @@
             this.lblDosenPengampu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDosenPengampu.Location = new System.Drawing.Point(7, 138);
             this.lblDosenPengampu.Name = "lblDosenPengampu";
-            this.lblDosenPengampu.Size = new System.Drawing.Size(95, 29);
+            this.lblDosenPengampu.Size = new System.Drawing.Size(113, 29);
             this.lblDosenPengampu.TabIndex = 37;
-            this.lblDosenPengampu.Text = "Dosen :";
+            this.lblDosenPengampu.Text = "Lecturer :";
             // 
             // lblMatKulName
             // 
@@ -154,9 +154,9 @@
             this.lblMatKulName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMatKulName.Location = new System.Drawing.Point(7, 80);
             this.lblMatKulName.Name = "lblMatKulName";
-            this.lblMatKulName.Size = new System.Drawing.Size(169, 29);
+            this.lblMatKulName.Size = new System.Drawing.Size(174, 29);
             this.lblMatKulName.TabIndex = 36;
-            this.lblMatKulName.Text = "Nama MatKul :";
+            this.lblMatKulName.Text = "Course Name :";
             // 
             // textBoxMatKulName
             // 
@@ -180,6 +180,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(978, 644);
             this.Controls.Add(this.comboBoxDosenPengampu);
             this.Controls.Add(this.btnBack);
@@ -197,7 +198,7 @@
             this.MaximumSize = new System.Drawing.Size(1000, 700);
             this.MinimumSize = new System.Drawing.Size(1000, 700);
             this.Name = "MataKuliah";
-            this.Text = "Mata Kuliah";
+            this.Text = "Course";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMatKul)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

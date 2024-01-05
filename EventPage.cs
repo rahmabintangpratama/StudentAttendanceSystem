@@ -59,7 +59,7 @@ namespace StudentAttendanceSystem
 
         private void refreshData()
         {
-            string query = "SELECT e.EventID AS Event_ID, e.EventName AS Nama_Event, m.NamaMataKuliah AS Mata_Kuliah, e.venue AS Ruang, e.Tanggal AS Tanggal FROM event e JOIN matakuliah m ON (e.KodeMataKuliah = m.KodeMataKuliah) ORDER BY Tanggal DESC, Nama_Event ASC, Mata_Kuliah ASC";
+            string query = "SELECT e.EventID AS Event_ID, e.EventName AS Event_Name, m.NamaMataKuliah AS Course, e.venue AS Room, e.Tanggal AS Date FROM event e JOIN matakuliah m ON (e.KodeMataKuliah = m.KodeMataKuliah) ORDER BY Date DESC, Event_Name ASC, Course ASC";
             DataTable eventData = connect.RetrieveData(query);
 
             dataGridViewEvent.DataSource = eventData;
@@ -153,7 +153,7 @@ namespace StudentAttendanceSystem
                 }
                 else
                 {
-                    MessageBox.Show("Event does not exist in the database. Unable to update.");
+                    MessageBox.Show("Event ID does not found.");
                     return false;
                 }
             }
@@ -197,7 +197,7 @@ namespace StudentAttendanceSystem
             }
             else
             {
-                MessageBox.Show("Event does not exist in the database. Unable to update.");
+                MessageBox.Show("Event ID does not found.");
             }
 
         refreshData();

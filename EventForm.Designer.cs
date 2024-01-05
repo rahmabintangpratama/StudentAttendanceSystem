@@ -93,9 +93,9 @@
             this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDate.Location = new System.Drawing.Point(7, 261);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(114, 29);
+            this.lblDate.Size = new System.Drawing.Size(75, 29);
             this.lblDate.TabIndex = 80;
-            this.lblDate.Text = "Tanggal :";
+            this.lblDate.Text = "Date :";
             // 
             // comboBoxMatKulName
             // 
@@ -134,9 +134,9 @@
             this.lblEventName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEventName.Location = new System.Drawing.Point(7, 80);
             this.lblEventName.Name = "lblEventName";
-            this.lblEventName.Size = new System.Drawing.Size(155, 29);
+            this.lblEventName.Size = new System.Drawing.Size(156, 29);
             this.lblEventName.TabIndex = 76;
-            this.lblEventName.Text = "Nama Event :";
+            this.lblEventName.Text = "Event Name :";
             // 
             // dataGridViewEvent
             // 
@@ -195,9 +195,9 @@
             this.lblVenue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblVenue.Location = new System.Drawing.Point(7, 199);
             this.lblVenue.Name = "lblVenue";
-            this.lblVenue.Size = new System.Drawing.Size(95, 29);
+            this.lblVenue.Size = new System.Drawing.Size(90, 29);
             this.lblVenue.TabIndex = 71;
-            this.lblVenue.Text = "Ruang :";
+            this.lblVenue.Text = "Room :";
             // 
             // lblMatKulName
             // 
@@ -205,9 +205,9 @@
             this.lblMatKulName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMatKulName.Location = new System.Drawing.Point(7, 138);
             this.lblMatKulName.Name = "lblMatKulName";
-            this.lblMatKulName.Size = new System.Drawing.Size(169, 29);
+            this.lblMatKulName.Size = new System.Drawing.Size(174, 29);
             this.lblMatKulName.TabIndex = 70;
-            this.lblMatKulName.Text = "Nama MatKul :";
+            this.lblMatKulName.Text = "Course Name :";
             // 
             // textBoxRuang
             // 
@@ -221,6 +221,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(978, 644);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.textBoxEventID);

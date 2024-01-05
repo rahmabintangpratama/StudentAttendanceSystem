@@ -77,7 +77,7 @@ namespace StudentAttendanceSystem
 
         private void refreshData()
         {
-            string query = "SELECT u.UserID AS UserID, u.Nama AS Nama, u.Email AS Email, r.job AS Role FROM user u JOIN role_value r ON (u.Role = r.Role) ORDER BY Role ASC, UserID ASC";
+            string query = "SELECT u.UserID AS User_ID, u.Nama AS Name, u.Email AS Email, r.job AS Role FROM user u JOIN role_value r ON (u.Role = r.Role) ORDER BY Role ASC, User_ID ASC";
             DataTable userData = connect.RetrieveData(query);
 
             dataGridViewUser.DataSource = userData;

@@ -14,14 +14,15 @@ namespace StudentAttendanceSystem
 {
     public partial class LoginPage : Form
     {
+        private Connect connect;
         private UserProcess userProcess;
         public static LoginSession currentLoginSession;
-        private const string connectionString = "server=127.0.0.1; database=db_studentattendancesystem; user=root; password=";
 
 
         public LoginPage()
         {
-            InitializeComponent(); 
+            InitializeComponent();
+            connect = new Connect();
             userProcess = new UserProcess();
 
             this.FormClosing += LoginPage_FormClosing;
@@ -40,10 +41,11 @@ namespace StudentAttendanceSystem
             if (LoginUser(email, password))
             {
                 long userID = userProcess.GetUserID(email);
-                currentLoginSession = new LoginSession(email, userProcess.GetUserRole(email), userID);
-                int userRole = GetUserRole(email);
+                int role = GetUserRole(email);
 
-                OpenHomePage(userRole);
+                currentLoginSession = new LoginSession(email, userProcess.GetUserRole(email), userID);
+                OpenHomePage(role);
+                this.Hide();
             }
             else
             {
@@ -53,65 +55,22 @@ namespace StudentAttendanceSystem
 
         private bool LoginUser(string email, string password)
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                connection.Open();
+            bool isValid = userProcess.ValidateUser(email, password);
 
-                string query = "SELECT Password, Role FROM user WHERE Email = @Email";
-
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Email", email);
-                    command.Parameters.AddWithValue("@Password", password);
-
-                    using (MySqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            string hashedPassword = reader["Password"].ToString();
-
-                            return VerifyPassword(password, hashedPassword);
-                        }
-                    }
-                }
-            }
-
-            return false;
-        }
-
-        private bool VerifyPassword(string inputPassword, string hashedPassword)
-        {
-            using (SHA256 sha256 = SHA256.Create())
-            {
-                byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(inputPassword));
-
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < hashedBytes.Length; i++)
-                {
-                    builder.Append(hashedBytes[i].ToString("x2"));
-                }
-
-                return string.Equals(builder.ToString(), hashedPassword, StringComparison.OrdinalIgnoreCase);
-            }
+            return isValid;
         }
 
         private int GetUserRole(string email)
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            string query = $"SELECT Role FROM user WHERE email = '{email}'";
+            DataTable result = connect.RetrieveData(query);
+
+            if (result.Rows.Count > 0)
             {
-                connection.Open();
-
-                string query = "SELECT Role FROM user WHERE Email = @Email";
-
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Email", email);
-
-                    object result = command.ExecuteScalar();
-
-                    return result != null ? Convert.ToInt32(result) : 0;
-                }
+                return Convert.ToInt32(result.Rows[0]["Role"]);
             }
+
+            return 0;
         }
 
         private void OpenHomePage(int Role)
@@ -134,7 +93,7 @@ namespace StudentAttendanceSystem
                     break;
 
                 default:
-                    MessageBox.Show("Role tidak valid.");
+                    MessageBox.Show("Role does not valid.");
                     break;
             }
 

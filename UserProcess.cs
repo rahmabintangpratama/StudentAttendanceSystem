@@ -35,6 +35,39 @@ namespace StudentAttendanceSystem
             }
         }
 
+        public bool ValidateUser(string email, string password)
+        {
+            string query = $"SELECT * FROM user WHERE Email='{email}'";
+            DataTable result = connect.RetrieveData(query);
+
+            if (result.Rows.Count > 0)
+            {
+                string UserPassword = result.Rows[0]["Password"].ToString();
+
+                bool isValid = VerifyPassword(password, UserPassword);
+
+                return isValid;
+            }
+
+            return false;
+        }
+
+        private bool VerifyPassword(string inputPassword, string UserPassword)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(inputPassword));
+
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < hashedBytes.Length; i++)
+                {
+                    builder.Append(hashedBytes[i].ToString("x2"));
+                }
+
+                return string.Equals(builder.ToString(), UserPassword, StringComparison.OrdinalIgnoreCase);
+            }
+        }
+
         public void InputUser(string userID, string nama, string email, string password, int Role)
         {
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
@@ -83,13 +116,13 @@ namespace StudentAttendanceSystem
 
                 if (newRole != 2 && IsUserInMatKulTable(UserID))
                 {
-                    MessageBox.Show("Cannot edit the role of this user. The user is still listed in the \"Mata Kuliah\" table.");
+                    MessageBox.Show("Cannot edit the role of this user. The user is still listed in the Course table.");
                     return;
                 }
 
                 if (newRole != 3 && IsUserInAttendanceTable(UserID))
                 {
-                    MessageBox.Show("Cannot edit the role of this user. The user is still listed in the \"Presensi\" table.");
+                    MessageBox.Show("Cannot edit the role of this user. The user is still listed in the Attendance table.");
                     return;
                 }
 
@@ -123,13 +156,13 @@ namespace StudentAttendanceSystem
                 {
                     if (IsUserInAttendanceTable(UserID))
                     {
-                        MessageBox.Show("Cannot delete this user. The user is still listed in the \"Presensi\" table.");
+                        MessageBox.Show("Cannot delete this user. The user is still listed in the Attendance table.");
                         return;
                     }
 
                     if (IsUserInMatKulTable(UserID))
                     {
-                        MessageBox.Show("Cannot delete this user. The user is still listed in the \"Mata Kuliah\" table.");
+                        MessageBox.Show("Cannot delete this user. The user is still listed in the Course table.");
                         return;
                     }
 

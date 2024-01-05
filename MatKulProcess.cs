@@ -24,11 +24,11 @@ namespace StudentAttendanceSystem
                 {
                     string query = $"INSERT INTO matakuliah (KodeMataKuliah, NamaMataKuliah, UserID) VALUES ('{MatKul}','{MatKulName}','{UserID}')";
                     connect.RunCommand(query);
-                    MessageBox.Show("\"Mata Kuliah\" successfully added.");
+                    MessageBox.Show("Course successfully added.");
                 }
                 else
                 {
-                    MessageBox.Show("\"Mata Kuliah\" Name or Code is already in use. Please use a different Name or Code.");
+                    MessageBox.Show("Course Name or Code is already in use. Please use a different Name or Code.");
                 }
             }
             catch (Exception ex)
@@ -61,11 +61,11 @@ namespace StudentAttendanceSystem
                 {
                     string query = $"UPDATE matakuliah SET NamaMataKuliah = '{MatKulName}', UserID = '{UserID}' WHERE KodeMataKuliah = '{MatKul}'";
                     connect.RunCommand(query);
-                    MessageBox.Show("\"Mata Kuliah\" successfully edited.");
+                    MessageBox.Show("Course successfully edited.");
                 }
                 else
                 {
-                    MessageBox.Show("\"Mata Kuliah\" Name is already in use. Please use a different Name.");
+                    MessageBox.Show("Course Name is already in use. Please use a different Name.");
                 }
             }
             catch (Exception ex)
@@ -90,12 +90,12 @@ namespace StudentAttendanceSystem
                 {
                     string query = $"DELETE FROM matakuliah WHERE KodeMataKuliah = '{MatKul}'";
                     connect.RunCommand(query);
-                    MessageBox.Show("\"Mata Kuliah\" successfully deleted.");
+                    MessageBox.Show("Course successfully deleted.");
                     return true;
                 }
                 else
                 {
-                    MessageBox.Show("\"Mata Kuliah\" cannot be deleted as it is still connected to Event data.");
+                    MessageBox.Show("Course cannot be deleted as it is still connected to Event data.");
                     return false;
                 }
             }

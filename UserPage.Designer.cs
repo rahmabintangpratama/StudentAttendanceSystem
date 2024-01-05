@@ -182,9 +182,9 @@
             this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblName.Location = new System.Drawing.Point(7, 80);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(89, 29);
+            this.lblName.Size = new System.Drawing.Size(90, 29);
             this.lblName.TabIndex = 18;
-            this.lblName.Text = "Nama :";
+            this.lblName.Text = "Name :";
             // 
             // textBoxName
             // 
@@ -221,6 +221,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(978, 644);
             this.Controls.Add(this.comboBoxRole);
             this.Controls.Add(this.btnBack);

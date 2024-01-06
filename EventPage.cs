@@ -41,6 +41,23 @@ namespace StudentAttendanceSystem
             }
         }
 
+        private void textBoxEventID_TextChanged(object sender, EventArgs e)
+        {
+
+            if (!string.IsNullOrEmpty(textBoxEventID.Text) && !int.TryParse(textBoxEventID.Text, out _))
+            {
+                MessageBox.Show("Please enter a valid Event ID.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxEventID.Text = string.Empty;
+            }
+
+            if (textBoxEventID.Text.Length > 8)
+            {
+                MessageBox.Show("Event ID should be limited to 8 digits.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxEventID.Text = textBoxEventID.Text.Substring(0, 8);
+                textBoxEventID.SelectionStart = textBoxEventID.Text.Length;
+            }
+        }
+
         private void ComboBoxMatKulNameData()
         {
             DataTable matkulTable = GetMatKul();

@@ -44,6 +44,23 @@ namespace StudentAttendanceSystem
             }
         }
 
+        private void textBoxPresensiID_TextChanged(object sender, EventArgs e)
+        {
+
+            if (!string.IsNullOrEmpty(textBoxPresensiID.Text) && !int.TryParse(textBoxPresensiID.Text, out _))
+            {
+                MessageBox.Show("Please enter a valid Attendance ID.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxPresensiID.Text = string.Empty;
+            }
+
+            if (textBoxPresensiID.Text.Length > 8)
+            {
+                MessageBox.Show("Attendance ID should be limited to 8 digits.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxPresensiID.Text = textBoxPresensiID.Text.Substring(0, 8);
+                textBoxPresensiID.SelectionStart = textBoxPresensiID.Text.Length;
+            }
+        }
+
         private void ComboBoxStudentData()
         {
             DataTable studentTable = GetStudent();

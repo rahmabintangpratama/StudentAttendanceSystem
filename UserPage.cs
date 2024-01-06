@@ -42,6 +42,23 @@ namespace StudentAttendanceSystem
             }
         }
 
+        private void textBoxUserId_TextChanged(object sender, EventArgs e)
+        {
+
+            if (!string.IsNullOrEmpty(textBoxUserId.Text) && !long.TryParse(textBoxUserId.Text, out _))
+            {
+                MessageBox.Show("Please enter a valid User ID.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxUserId.Text = string.Empty;
+            }
+
+            if (textBoxUserId.Text.Length > 18)
+            {
+                MessageBox.Show("User ID should be limited to 18 digits.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxUserId.Text = textBoxUserId.Text.Substring(0, 18);
+                textBoxUserId.SelectionStart = textBoxUserId.Text.Length;
+            }
+        }
+
         private void ComboBoxRoleData()
         {
             DataTable roleTable = GetRole();

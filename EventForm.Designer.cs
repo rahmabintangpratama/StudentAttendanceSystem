@@ -67,6 +67,7 @@
             this.textBoxEventID.Name = "textBoxEventID";
             this.textBoxEventID.Size = new System.Drawing.Size(381, 35);
             this.textBoxEventID.TabIndex = 1;
+            this.textBoxEventID.TextChanged += new System.EventHandler(this.textBoxEventID_TextChanged);
             this.textBoxEventID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxEventID_KeyPress);
             // 
             // lblEventID

@@ -96,6 +96,7 @@
             this.textBoxPresensiID.Name = "textBoxPresensiID";
             this.textBoxPresensiID.Size = new System.Drawing.Size(381, 35);
             this.textBoxPresensiID.TabIndex = 1;
+            this.textBoxPresensiID.TextChanged += new System.EventHandler(this.textBoxPresensiID_TextChanged);
             this.textBoxPresensiID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPresensiID_KeyPress);
             // 
             // btnRefresh
